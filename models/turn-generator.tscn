@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8n33iahlojvw"]
+
+[ext_resource type="Script" path="res://scripts/turn-generator.gd" id="1_yg6yq"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_868u5"]
+
+[node name="turn-generator" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_868u5")
+script = ExtResource("1_yg6yq")

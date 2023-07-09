@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkfdwg5byad46"]
+
+[ext_resource type="Texture2D" uid="uid://dol203t2su2xe" path="res://materials/grass.jpg" id="1_ubk6a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3s5x"]
+albedo_texture = ExtResource("1_ubk6a")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nskm2"]
+material = SubResource("StandardMaterial3D_a3s5x")
+size = Vector2(8, 8)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_m5mdk"]
+points = PackedVector3Array(-4, 0, -4, -4, 0, 4, 4, 0, -4, 4, 0, 4)
+
+[node name="trackparts" type="Node3D"]
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nskm2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_m5mdk")
+
+[node name="Slope1D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, -0.375, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("PlaneMesh_nskm2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Slope1D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope1D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_m5mdk")
+
+[node name="Slope2D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, -0.375, 1, -0.375, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_nskm2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Slope2D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope2D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_m5mdk")
