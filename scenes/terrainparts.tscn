@@ -19,6 +19,7 @@ points = PackedVector3Array(-4, 0, -4, -4, 0, 4, 4, 0, -4, 4, 0, 4)
 mesh = SubResource("PlaneMesh_nskm2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_m5mdk")
@@ -28,6 +29,7 @@ transform = Transform3D(1, 0, 0, -0.375, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("PlaneMesh_nskm2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Slope1D"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope1D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_m5mdk")
@@ -37,6 +39,7 @@ transform = Transform3D(1, 0, 0, -0.375, 1, -0.375, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_nskm2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Slope2D"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope2D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_m5mdk")

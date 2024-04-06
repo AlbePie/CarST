@@ -14,3 +14,11 @@ func _process(delta):
 	speed_ema = speed_ema * current_momentum + speed * (1 - current_momentum)
 	speedmeter.value = speed_ema
 	speedlabel.text = str(round(speed_ema))
+
+
+func _on_quit_pressed():
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+
+func _on_reset_pressed():
+	get_tree().reload_current_scene()

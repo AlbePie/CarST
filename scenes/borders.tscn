@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://c04s0006a1h3l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78x65"]
+size = Vector3(0.1, 1, 2.1)
+
+[node name="bordersproto" type="CSGCombiner3D"]
+
+[node name="Pillar1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+size = Vector3(0.1, 1, 0.1)
+
+[node name="Pillar2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+size = Vector3(0.1, 1, 0.1)
+
+[node name="Box" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+size = Vector3(0.1, 0.4, 2)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_78x65")

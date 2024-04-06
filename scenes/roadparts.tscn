@@ -31,6 +31,7 @@ visible = false
 mesh = SubResource("PlaneMesh_7vr5a")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Road+Col"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Road+Col/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
@@ -47,6 +48,7 @@ visible = false
 mesh = SubResource("PlaneMesh_7vr5a")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Slope+Col"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope+Col/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
@@ -54,13 +56,16 @@ shape = SubResource("ConvexPolygonShape3D_iugwd")
 
 [node name="Turn-Col" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+visible = false
 mesh = ExtResource("2_y6cx8")
 
 [node name="Turn+Col" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+visible = false
 mesh = ExtResource("2_y6cx8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Turn+Col"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Turn+Col/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_wpev5")

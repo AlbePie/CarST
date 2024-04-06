@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3xhpq4tfaueq"]
+[gd_scene load_steps=21 format=3 uid="uid://c3xhpq4tfaueq"]
 
 [ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_6knrt"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ojwwy"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="2_0ruqi"]
 [ext_resource type="Texture2D" uid="uid://dol203t2su2xe" path="res://materials/grass.jpg" id="2_f1tdf"]
+[ext_resource type="PackedScene" uid="uid://ce7t654f1lxa7" path="res://scenes/cube_1x.tscn" id="5_02skp"]
 [ext_resource type="MeshLibrary" uid="uid://cdgctny28fxhl" path="res://models/terrainparts.tres" id="5_odr38"]
 [ext_resource type="MeshLibrary" uid="uid://df7rqkseh7scm" path="res://models/roadparts.tres" id="6_1tgtp"]
 [ext_resource type="PackedScene" uid="uid://dbjhjrattxtu8" path="res://scenes/ui.tscn" id="7_h17ja"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="8_2gs3e"]
+[ext_resource type="PackedScene" uid="uid://c04s0006a1h3l" path="res://scenes/borders.tscn" id="10_ev03g"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x52af"]
 panorama = ExtResource("1_6knrt")
@@ -44,18 +46,6 @@ plane = Plane(0, 0, 1, -100)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cifgk"]
 plane = Plane(0, 0, -1, -100)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0lm61"]
-bounce = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3sab"]
-albedo_color = Color(0.65098, 0.372549, 0.0117647, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lrp5a"]
-material = SubResource("StandardMaterial3D_b3sab")
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3x51a"]
-points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -72,6 +62,7 @@ current = true
 script = ExtResource("1_ojwwy")
 
 [node name="Plane" type="StaticBody3D" parent="."]
+collision_layer = 3
 
 [node name="Plane mesh" type="MeshInstance3D" parent="Plane"]
 mesh = SubResource("PlaneMesh_2xtjf")
@@ -103,20 +94,129 @@ shape = SubResource("WorldBoundaryShape3D_76fhj")
 shape = SubResource("WorldBoundaryShape3D_cifgk")
 
 [node name="Car" parent="." instance=ExtResource("2_0ruqi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.253, -48)
+transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, -15, 0.253, -48)
 
 [node name="Movables" type="Node3D" parent="."]
 
-[node name="Cube" type="RigidBody3D" parent="Movables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32468, 0.557557, -36.4764)
-physics_material_override = SubResource("PhysicsMaterial_0lm61")
+[node name="Cube01" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3247, 0.557557, -64.4764)
 
-[node name="Cube mesh" type="MeshInstance3D" parent="Movables/Cube"]
-mesh = SubResource("BoxMesh_lrp5a")
-skeleton = NodePath("../../..")
+[node name="Cube02" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3247, 0.557557, -64.4764)
 
-[node name="Cube collision" type="CollisionShape3D" parent="Movables/Cube"]
-shape = SubResource("ConvexPolygonShape3D_3x51a")
+[node name="Cube03" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3247, 0.557557, -64.4764)
+
+[node name="Cube04" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3247, 0.557557, -64.4764)
+
+[node name="Cube05" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3247, 0.557557, -64.4764)
+
+[node name="Cube06" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3247, 0.557557, -64.4764)
+
+[node name="Cube07" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3247, 0.557557, -64.4764)
+
+[node name="Cube08" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3247, 0.557557, -64.4764)
+
+[node name="Cube09" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3247, 1.55756, -64.4764)
+
+[node name="Cube10" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3247, 1.55756, -64.4764)
+
+[node name="Cube11" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3247, 1.55756, -64.4764)
+
+[node name="Cube12" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3247, 1.55756, -64.4764)
+
+[node name="Cube13" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3247, 1.55756, -64.4764)
+
+[node name="Cube14" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3247, 1.55756, -64.4764)
+
+[node name="Cube15" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3247, 1.55756, -64.4764)
+
+[node name="Cube16" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3247, 1.55756, -64.4764)
+
+[node name="Cube17" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3247, 2.55756, -64.4764)
+
+[node name="Cube18" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3247, 2.55756, -64.4764)
+
+[node name="Cube19" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3247, 2.55756, -64.4764)
+
+[node name="Cube20" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3247, 2.55756, -64.4764)
+
+[node name="Cube21" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3247, 2.55756, -64.4764)
+
+[node name="Cube22" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3247, 2.55756, -64.4764)
+
+[node name="Cube23" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3247, 2.55756, -64.4764)
+
+[node name="Cube24" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3247, 2.55756, -64.4764)
+
+[node name="Cube25" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3247, 3.55756, -64.4764)
+
+[node name="Cube26" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3247, 3.55756, -64.4764)
+
+[node name="Cube27" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3247, 3.55756, -64.4764)
+
+[node name="Cube28" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3247, 3.55756, -64.4764)
+
+[node name="Cube29" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3247, 3.55756, -64.4764)
+
+[node name="Cube30" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3247, 3.55756, -64.4764)
+
+[node name="Cube31" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3247, 3.55756, -64.4764)
+
+[node name="Cube32" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3247, 3.55756, -64.4764)
+
+[node name="Cube33" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3247, 4.55756, -64.4764)
+
+[node name="Cube34" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3247, 4.55756, -64.4764)
+
+[node name="Cube35" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3247, 4.55756, -64.4764)
+
+[node name="Cube36" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3247, 4.55756, -64.4764)
+
+[node name="Cube37" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3247, 4.55756, -64.4764)
+
+[node name="Cube38" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3247, 4.55756, -64.4764)
+
+[node name="Cube39" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3247, 4.55756, -64.4764)
+
+[node name="Cube40" parent="Movables" instance=ExtResource("5_02skp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3247, 4.55756, -64.4764)
 
 [node name="Terrain" type="GridMap" parent="."]
 mesh_library = ExtResource("5_odr38")
@@ -142,5 +242,34 @@ metadata/_editor_floor_ = Vector3(0, 2, 0)
 
 [node name="UI" parent="." instance=ExtResource("7_h17ja")]
 script = ExtResource("8_2gs3e")
+
+[node name="RoadBorders" type="Node3D" parent="."]
+
+[node name="no1" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -18, 7, -67.4)
+
+[node name="no2" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -14, 7, -67.4)
+
+[node name="no3" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -10, 7, -67.4)
+
+[node name="no4" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -6, 7, -67.4)
+
+[node name="no5" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -18, 7, -60.6)
+
+[node name="no6" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -14, 7, -60.6)
+
+[node name="no7" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -10, 7, -60.6)
+
+[node name="no8" parent="RoadBorders" instance=ExtResource("10_ev03g")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -6, 7, -60.6)
+
+[connection signal="pressed" from="UI/Quit" to="UI" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Reset" to="UI" method="_on_reset_pressed"]
 
 [editable path="UI"]

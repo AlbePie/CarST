@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=3 uid="uid://b8pm65yormvxa"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
+[ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
+[ext_resource type="Material" uid="uid://cr58xjl0hn5da" path="res://materials/carpad.material" id="3_fd8ig"]
+[ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="4_mtpe1"]
+[ext_resource type="Texture2D" uid="uid://btpwpk2f0rtds" path="res://sprites/red.svg" id="5_q5q11"]
+[ext_resource type="Texture2D" uid="uid://1faxlonbgrii" path="res://sprites/blue.svg" id="6_h4pgb"]
+[ext_resource type="Texture2D" uid="uid://3ibjexrxobjs" path="res://sprites/green.svg" id="7_7kagc"]
+[ext_resource type="Texture2D" uid="uid://c0pehk2oshcfl" path="res://sprites/yellow.svg" id="8_4mth4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iy3gq"]
+sky_horizon_color = Color(0.595, 0.70125, 0.85, 1)
+sky_curve = 0.02
+ground_bottom_color = Color(0.385, 0.454, 0.55, 1)
+ground_horizon_color = Color(0.595, 0.70125, 0.85, 1)
+
+[sub_resource type="Sky" id="Sky_cg72l"]
+sky_material = SubResource("ProceduralSkyMaterial_iy3gq")
+
+[sub_resource type="Environment" id="Environment_h1bor"]
+background_mode = 2
+sky = SubResource("Sky_cg72l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_26p5h"]
+material = ExtResource("3_fd8ig")
+size = Vector3(6, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
+size = Vector3(6, 1, 6)
+
+[node name="menu" type="Node3D"]
+script = ExtResource("1_30doa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h1bor")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Car" parent="." instance=ExtResource("1_kl4h3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+controlled = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.422618, 0.906308, 0, 0.906308, 0.422618, -1, 1.84732e-08, -3.9616e-08, 4.7, 3, 0)
+
+[node name="carpad" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="carpad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+mesh = SubResource("BoxMesh_26p5h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="carpad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+shape = SubResource("BoxShape3D_4tgxf")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorPick" type="Control" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 920.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Menu/ColorPick"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -358.0
+offset_right = -216.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 40
+text = "Color:  "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Options" type="OptionButton" parent="Menu/ColorPick"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -217.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme = ExtResource("4_mtpe1")
+item_count = 5
+selected = 1
+popup/item_0/text = "Red"
+popup/item_0/icon = ExtResource("5_q5q11")
+popup/item_0/id = 0
+popup/item_1/text = "Blue"
+popup/item_1/icon = ExtResource("6_h4pgb")
+popup/item_1/id = 1
+popup/item_2/text = "Green"
+popup/item_2/icon = ExtResource("7_7kagc")
+popup/item_2/id = 2
+popup/item_3/text = "Yellow"
+popup/item_3/icon = ExtResource("8_4mth4")
+popup/item_3/id = 3
+popup/item_4/text = "Custom"
+popup/item_4/id = 4
+
+[node name="ColorPicker" type="ColorPicker" parent="Menu/ColorPick"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -290.0
+offset_top = 80.0
+offset_bottom = 552.0
+grow_horizontal = 0
+color = Color(0, 0, 0.501961, 1)
+edit_alpha = false
+picker_shape = 2
+can_add_swatches = false
+presets_visible = false
+
+[node name="PlayButton" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+
+[connection signal="item_selected" from="Menu/ColorPick/Options" to="." method="_on_color_selected"]
+[connection signal="color_changed" from="Menu/ColorPick/ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]

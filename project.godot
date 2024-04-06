@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="CarST"
-run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.1", "Mobile")
+run/main_scene="res://scenes/menu.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+management="*res://scripts/management.gd"
 
 [display]
 
