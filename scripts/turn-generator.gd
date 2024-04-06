@@ -1,6 +1,13 @@
+@tool
 extends MeshInstance3D
 
-func _ready():
+@export var compile = false:
+	set(val):
+		compile = false
+		if val:
+			do_compiling()
+
+func do_compiling():
 	var inner_radius = 8.5
 	var outer_radius = 15.5
 	var segments = 16

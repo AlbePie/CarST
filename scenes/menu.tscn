@@ -31,8 +31,11 @@ size = Vector3(6, 1, 6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
 size = Vector3(6, 1, 6)
 
-[node name="menu" type="Node3D"]
+[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "colorpicker", "coloroptions")]
 script = ExtResource("1_30doa")
+car = NodePath("Car")
+colorpicker = NodePath("Menu/ColorPick/ColorPicker")
+coloroptions = NodePath("Menu/ColorPick/Options")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h1bor")

@@ -4,9 +4,10 @@ extends Node3D
 @export var turn:float = 10. ## how much time takes the car to turn around
 @export var start_immediately = false ## if the game should start immediately
 
-@onready var car = $Car
-@onready var colorpicker = $Menu/ColorPick/ColorPicker
-@onready var coloroptions = $Menu/ColorPick/Options
+@export_group("Node References")
+@export var car:VehicleBody3D
+@export var colorpicker:ColorPicker
+@export var coloroptions:OptionButton
 
 var uses_custom_color = false
 
