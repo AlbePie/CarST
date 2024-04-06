@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c3xhpq4tfaueq"]
+[gd_scene load_steps=23 format=3 uid="uid://c3xhpq4tfaueq"]
 
 [ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_6knrt"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ojwwy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dol203t2su2xe" path="res://materials/grass.jpg" id="2_f1tdf"]
 [ext_resource type="MeshLibrary" uid="uid://cdgctny28fxhl" path="res://models/terrainparts.tres" id="5_odr38"]
 [ext_resource type="MeshLibrary" uid="uid://df7rqkseh7scm" path="res://models/roadparts.tres" id="6_1tgtp"]
+[ext_resource type="PackedScene" uid="uid://dbjhjrattxtu8" path="res://scenes/ui.tscn" id="7_h17ja"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="8_2gs3e"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x52af"]
 panorama = ExtResource("1_6knrt")
@@ -103,15 +105,17 @@ shape = SubResource("WorldBoundaryShape3D_cifgk")
 [node name="Car" parent="." instance=ExtResource("2_0ruqi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.253, -48)
 
-[node name="Cube" type="RigidBody3D" parent="."]
+[node name="Movables" type="Node3D" parent="."]
+
+[node name="Cube" type="RigidBody3D" parent="Movables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32468, 0.557557, -36.4764)
 physics_material_override = SubResource("PhysicsMaterial_0lm61")
 
-[node name="Cube mesh" type="MeshInstance3D" parent="Cube"]
+[node name="Cube mesh" type="MeshInstance3D" parent="Movables/Cube"]
 mesh = SubResource("BoxMesh_lrp5a")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="Cube collision" type="CollisionShape3D" parent="Cube"]
+[node name="Cube collision" type="CollisionShape3D" parent="Movables/Cube"]
 shape = SubResource("ConvexPolygonShape3D_3x51a")
 
 [node name="Terrain" type="GridMap" parent="."]
@@ -135,3 +139,8 @@ data = {
 "cells": PackedInt32Array(65534, 65532, 1048576, 65534, 65530, 1048576, 65534, 65531, 1048577, 65534, 65529, 1048576, 65534, 65533, 1048578, 131070, 65534, 1048576, 131070, 65535, 1048576, 131070, 0, 1048578, 196606, 1, 1048576, 196606, 2, 1048576, 196606, 3, 1048576, 196606, 4, 1048576, 131070, 5, 1441794, 131070, 6, 1441792, 131070, 7, 1441792, 65534, 8, 1441794, 65534, 9, 1441792, 65534, 10, 1441796, 65532, 11, 655360, 65534, 65528, 1048576, 65530, 65529, 1048580, 65530, 65530, 1441792, 65530, 65531, 1441792, 65530, 65532, 1441792, 65530, 65534, 1441792, 65530, 65535, 1441792, 65530, 0, 1441792, 65530, 1, 1441792, 65530, 2, 1441792, 65530, 3, 1441792, 65530, 4, 1441792, 65530, 5, 1441792, 65530, 6, 1441792, 65530, 7, 1441792, 65530, 8, 1441792, 65530, 9, 1441792, 65531, 11, 655364, 65530, 65533, 1441792, 65532, 65528, 655363, 131069, 65528, 655363, 196606, 65528, 655361, 196607, 65528, 655361, 131072, 65528, 5, 131074, 65531, 655365, 131075, 65531, 655361, 65540, 65531, 3, 5, 65531, 3, 6, 65531, 0, 8, 65530, 1441796, 65534, 65527, 1048580, 0, 65526, 0, 1, 65526, 0, 2, 65526, 0, 3, 65526, 0, 4, 65526, 0, 5, 65526, 0, 6, 65526, 0, 7, 65526, 4, 8, 65528, 1441792, 8, 65529, 1441792)
 }
 metadata/_editor_floor_ = Vector3(0, 2, 0)
+
+[node name="UI" parent="." instance=ExtResource("7_h17ja")]
+script = ExtResource("8_2gs3e")
+
+[editable path="UI"]

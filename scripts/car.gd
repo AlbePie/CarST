@@ -13,14 +13,15 @@ func _process(_delta):
 	
 	var ratio = clamp(1 - velocity / 80, 0.5, 1)
 	engine_force = 0
+	var forward = linear_velocity.dot(transform.basis.z)
 	if Input.is_action_pressed("ui_up"): engine_force += 150 * ratio
-	if Input.is_action_pressed("ui_down"): engine_force -= 150
+	if Input.is_action_pressed("ui_down"): engine_force -= 150 if forward > 0 else 50
 	brake = 3 if Input.is_action_pressed("brake") else 0
 	
-	ratio = clamp(1 - velocity / 40, 0.5, 1)
+	ratio = clamp(1 - velocity / 20, 0, 1)
 	steering = 0
-	if Input.is_action_pressed("ui_left"): steering += 0.35 * ratio
-	if Input.is_action_pressed("ui_right"): steering -= 0.35 * ratio
+	if Input.is_action_pressed("ui_left"): steering += 0.3 * ratio + 0.2
+	if Input.is_action_pressed("ui_right"): steering -= 0.3 * ratio + 0.2
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("reset"):
