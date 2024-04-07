@@ -34,9 +34,9 @@ func start_flipped_flashing():
 	stop_flipped_flashing()
 	
 	flash_tween = create_tween()
-	flash_tween.tween_property(flippedlabel, "visible", true, 0)
-	flash_tween.tween_interval(0.5)
 	flash_tween.tween_property(flippedlabel, "visible", false, 0)
+	flash_tween.tween_interval(0.5)
+	flash_tween.tween_property(flippedlabel, "visible", true, 0)
 	flash_tween.tween_interval(0.5)
 	flash_tween.tween_callback(self.start_flipped_flashing)
 
