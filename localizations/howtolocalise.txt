@@ -1,0 +1,4 @@
+We're using Godot CSV import
+
+More here:
+https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_translations.html

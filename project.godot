@@ -23,8 +23,11 @@ management="*res://scripts/management.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=768
-window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom="res://themes/ui.theme"
 
 [input]
 
@@ -80,7 +83,7 @@ back_camera={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://localizations/en_USA.translation")
+locale/translations=PackedStringArray("res://localizations/languages.en_US.translation")
 
 [rendering]
 

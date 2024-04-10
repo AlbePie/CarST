@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
-[ext_resource type="Material" uid="uid://cr58xjl0hn5da" path="res://materials/carpad.material" id="3_fd8ig"]
+[ext_resource type="PlaneMesh" uid="uid://bcm8qwbme66mu" path="res://models/grass_1000x1000.tres" id="3_8dfn8"]
 [ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="4_mtpe1"]
+[ext_resource type="StyleBox" uid="uid://dirs12hbhngxp" path="res://themes/transparent.stylebox" id="5_knc55"]
 [ext_resource type="Texture2D" uid="uid://btpwpk2f0rtds" path="res://sprites/red.svg" id="5_q5q11"]
 [ext_resource type="Texture2D" uid="uid://1faxlonbgrii" path="res://sprites/blue.svg" id="6_h4pgb"]
 [ext_resource type="Texture2D" uid="uid://3ibjexrxobjs" path="res://sprites/green.svg" id="7_7kagc"]
@@ -24,18 +25,15 @@ sky = SubResource("Sky_cg72l")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_26p5h"]
-material = ExtResource("3_fd8ig")
-size = Vector3(6, 1, 6)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
 size = Vector3(6, 1, 6)
 
-[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "colorpicker", "coloroptions")]
+[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "publicpopup", "colorpicker", "coloroptions")]
 script = ExtResource("1_30doa")
 car = NodePath("Car")
-colorpicker = NodePath("Menu/ColorPick/ColorPicker")
-coloroptions = NodePath("Menu/ColorPick/Options")
+publicpopup = NodePath("Menu/PlayPublicPopup")
+colorpicker = NodePath("Menu/MenuTabs/{mtab_user_options}/ColorPicker")
+coloroptions = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Options")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h1bor")
@@ -53,104 +51,199 @@ transform = Transform3D(-4.37114e-08, -0.422618, 0.906308, 0, 0.906308, 0.422618
 
 [node name="carpad" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="carpad"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
-mesh = SubResource("BoxMesh_26p5h")
+[node name="Grass" type="MeshInstance3D" parent="carpad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = ExtResource("3_8dfn8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="carpad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 shape = SubResource("BoxShape3D_4tgxf")
 
-[node name="Menu" type="Control" parent="."]
-layout_mode = 3
+[node name="Menu" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorPick" type="Control" parent="Menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 920.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Filling1" type="Control" parent="Menu"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 
-[node name="Label" type="Label" parent="Menu/ColorPick"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -358.0
-offset_right = -216.0
-offset_bottom = 72.0
-grow_horizontal = 0
+[node name="Title" type="Label" parent="Menu"]
+layout_mode = 2
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 64
+text = "{label.game_title}"
+horizontal_alignment = 1
+
+[node name="Filling2" type="Control" parent="Menu"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="MenuTabs" type="TabContainer" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("5_knc55")
+
+[node name="{mtab_play}" type="VBoxContainer" parent="Menu/MenuTabs"]
+layout_mode = 2
+
+[node name="PublicGame" type="Label" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "{label.public_game}"
+horizontal_alignment = 1
+
+[node name="PlayPublic" type="Button" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 48
+text = "{button.play}"
+
+[node name="Filling1" type="Control" parent="Menu/MenuTabs/{mtab_play}"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="CustomGame" type="Label" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "{label.custom_game}"
+horizontal_alignment = 1
+
+[node name="ServerKey" type="LineEdit" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+theme = ExtResource("4_mtpe1")
+placeholder_text = "{input.server_key}"
+
+[node name="Filling2" type="Control" parent="Menu/MenuTabs/{mtab_play}"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="CustomServer" type="HBoxContainer" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+
+[node name="Filling1" type="Control" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Host" type="Button" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 48
+text = "{button.host}"
+
+[node name="Filling2" type="Control" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Join" type="Button" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 48
+text = "{button.join}"
+
+[node name="Filling3" type="Control" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Filling3" type="Control" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DebugButton" type="Button" parent="Menu/MenuTabs/{mtab_play}"]
+layout_mode = 2
+theme = ExtResource("4_mtpe1")
+theme_override_font_sizes/font_size = 48
+text = "{button.play_debug}"
+
+[node name="{mtab_user_options}" type="VBoxContainer" parent="Menu/MenuTabs"]
+visible = false
+layout_mode = 2
+
+[node name="Line1" type="HBoxContainer" parent="Menu/MenuTabs/{mtab_user_options}"]
+layout_mode = 2
+
+[node name="Username" type="LineEdit" parent="Menu/MenuTabs/{mtab_user_options}/Line1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_mtpe1")
+placeholder_text = "{input.username}"
+max_length = 20
+
+[node name="Filling" type="Control" parent="Menu/MenuTabs/{mtab_user_options}/Line1"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/MenuTabs/{mtab_user_options}/Line1"]
+layout_mode = 2
 theme = ExtResource("4_mtpe1")
 theme_override_font_sizes/font_size = 40
-text = "Color:  "
+text = "{input.color}"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Options" type="OptionButton" parent="Menu/ColorPick"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -217.0
-offset_bottom = 72.0
-grow_horizontal = 0
+[node name="Options" type="OptionButton" parent="Menu/MenuTabs/{mtab_user_options}/Line1"]
+layout_mode = 2
 theme = ExtResource("4_mtpe1")
 item_count = 5
 selected = 1
-popup/item_0/text = "Red"
+popup/item_0/text = "{color.red}"
 popup/item_0/icon = ExtResource("5_q5q11")
 popup/item_0/id = 0
-popup/item_1/text = "Blue"
+popup/item_1/text = "{color.blue}"
 popup/item_1/icon = ExtResource("6_h4pgb")
 popup/item_1/id = 1
-popup/item_2/text = "Green"
+popup/item_2/text = "{color.green}"
 popup/item_2/icon = ExtResource("7_7kagc")
 popup/item_2/id = 2
-popup/item_3/text = "Yellow"
+popup/item_3/text = "{color.yellow}"
 popup/item_3/icon = ExtResource("8_4mth4")
 popup/item_3/id = 3
-popup/item_4/text = "Custom"
+popup/item_4/text = "{color.custom}"
 popup/item_4/id = 4
 
-[node name="ColorPicker" type="ColorPicker" parent="Menu/ColorPick"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -290.0
-offset_top = 80.0
-offset_bottom = 552.0
-grow_horizontal = 0
+[node name="ColorPicker" type="ColorPicker" parent="Menu/MenuTabs/{mtab_user_options}"]
+layout_mode = 2
+size_flags_horizontal = 8
 color = Color(0, 0, 0.501961, 1)
 edit_alpha = false
 picker_shape = 2
 can_add_swatches = false
+sampler_visible = false
 presets_visible = false
 
-[node name="PlayButton" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -192.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("4_mtpe1")
-theme_override_font_sizes/font_size = 48
-text = "PLAY"
+[node name="PlayPublicPopup" type="PopupPanel" parent="Menu"]
+title = "Public Game"
+position = Vector2i(25, 25)
+size = Vector2i(1230, 718)
 
-[connection signal="item_selected" from="Menu/ColorPick/Options" to="." method="_on_color_selected"]
-[connection signal="color_changed" from="Menu/ColorPick/ColorPicker" to="." method="_on_color_picker_color_changed"]
-[connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]
+[node name="UI" type="VBoxContainer" parent="Menu/PlayPublicPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1226.0
+offset_bottom = 714.0
+
+[node name="TODO" type="Label" parent="Menu/PlayPublicPopup/UI"]
+layout_mode = 2
+text = "TODO: Implement public game"
+
+[node name="Filling" type="Control" parent="Menu/PlayPublicPopup/UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Menu/PlayPublicPopup/UI"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "{button.back}"
+
+[connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/PlayPublic" to="." method="_on_play_public_pressed"]
+[connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/DebugButton" to="." method="_on_play_button_pressed"]
+[connection signal="item_selected" from="Menu/MenuTabs/{mtab_user_options}/Line1/Options" to="." method="_on_color_selected"]
+[connection signal="color_changed" from="Menu/MenuTabs/{mtab_user_options}/ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="pressed" from="Menu/PlayPublicPopup/UI/Back" to="Menu/PlayPublicPopup" method="hide"]

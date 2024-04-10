@@ -1,0 +1,12 @@
+[gd_resource type="PlaneMesh" load_steps=3 format=3 uid="uid://bcm8qwbme66mu"]
+
+[ext_resource type="Texture2D" uid="uid://dol203t2su2xe" path="res://materials/grass.jpg" id="1_agwpe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3hb0"]
+albedo_texture = ExtResource("1_agwpe")
+uv1_scale = Vector3(500, 500, 500)
+
+[resource]
+lightmap_size_hint = Vector2i(502, 5002)
+material = SubResource("StandardMaterial3D_q3hb0")
+size = Vector2(1000, 1000)

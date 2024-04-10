@@ -1,0 +1,28 @@
+keys	en_US
+-SECTION-	-LABELS-
+{label.game_title}	CarST
+{label.public_game}	Public Game
+{label.custom_game}	Custom Game
+-SECTION-	-BUTTONS-
+{button.play}	PLAY
+{button.back}	BACK
+{button.play_debug}	Play (Debug)
+{button.host}	Create game
+{button.join}	Join server
+{button.map_reset}	RESET THE MAP
+{button.menu_quit}	QUIT TO MENU
+-SECTION-	-INPUTS-
+{input.server_key}	Enter server key here
+{input.color}	Color: 
+{input.username}	Your username
+-SECTION-	-COLORS-
+{color.red}	Red
+{color.blue}	Blue
+{color.green}	Green
+{color.yellow}	Yellow
+{color.custom}	Custom
+-SECTION-	-MENU TABS-
+{mtab_play}	Play
+{mtab_user_options}	User Options
+-SECTION-	-HINTS-
+{hint.r_flip}	Press R to flip yourself
