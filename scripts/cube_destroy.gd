@@ -40,7 +40,7 @@ func _process(delta):
 
 func start_fading():
 	fade = true
-	custom_integrator = true
+	# custom_integrator = true
 	$"Cube collision".disabled = true
 
 func _on_detect_timer_timeout():

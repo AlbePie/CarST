@@ -6,6 +6,8 @@ enum CameraModes{BACK,DRIVER,FRONT}
 @export_group("Node References")
 @export var car:VehicleBody3D
 
+const driver_offset = Vector3(-0.3, .8, .2)
+
 func _ready():
 	_process(0)
 
@@ -17,7 +19,14 @@ func _process(_delta):
 		camera_mode %= len(CameraModes)
 	
 	match camera_mode:
-		_: # BACK AND FRONT, TEMPORARY DRIVER
+		CameraModes.DRIVER:
+			position = car.position
+			rotation = car.rotation
+			basis = basis.rotated(basis.y.normalized(), PI)
+			for i in range(3):
+				position += driver_offset[i] * basis[i]
+		_: # BACK AND FRONT
+			rotation_degrees = Vector3(-15, 0, 0)
 			rotation.y = car.rotation.y + (PI if camera_mode != CameraModes.FRONT else 0.)
 			position.x = car.position.x + 6 * sin(rotation.y)
 			position.z = car.position.z + 6 * cos(rotation.y)
