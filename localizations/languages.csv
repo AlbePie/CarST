@@ -22,7 +22,7 @@ keys	en_US
 {color.yellow}	Yellow
 {color.custom}	Custom
 -SECTION-	-MENU TABS-
-{mtab_play}	Play
-{mtab_user_options}	User Options
+{mtab_play}	  Play  
+{mtab_user_options}	  User Options  
 -SECTION-	-HINTS-
 {hint.r_flip}	Press R to flip yourself

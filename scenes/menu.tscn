@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8pm65yormvxa"]
+[gd_scene load_steps=13 format=3 uid="uid://b8pm65yormvxa"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
 [ext_resource type="PlaneMesh" uid="uid://bcm8qwbme66mu" path="res://models/grass_1000x1000.tres" id="3_8dfn8"]
 [ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="4_mtpe1"]
-[ext_resource type="StyleBox" uid="uid://dirs12hbhngxp" path="res://themes/transparent.stylebox" id="5_knc55"]
 [ext_resource type="Texture2D" uid="uid://btpwpk2f0rtds" path="res://sprites/red.svg" id="5_q5q11"]
 [ext_resource type="Texture2D" uid="uid://1faxlonbgrii" path="res://sprites/blue.svg" id="6_h4pgb"]
 [ext_resource type="Texture2D" uid="uid://3ibjexrxobjs" path="res://sprites/green.svg" id="7_7kagc"]
@@ -84,7 +83,6 @@ layout_mode = 2
 [node name="MenuTabs" type="TabContainer" parent="Menu"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("5_knc55")
 
 [node name="{mtab_play}" type="VBoxContainer" parent="Menu/MenuTabs"]
 layout_mode = 2

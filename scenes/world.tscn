@@ -380,7 +380,6 @@ shadow_bias = 0.02
 transform = Transform3D(-1, -2.26267e-08, -8.44439e-08, 0, 0.965926, -0.258819, 8.74228e-08, -0.258819, -0.965926, 0, 3.11372, -4.68681)
 current = true
 script = ExtResource("1_ojwwy")
-camera_mode = 1
 car = NodePath("../Car")
 
 [node name="Car" parent="Car" instance=ExtResource("2_0ruqi")]

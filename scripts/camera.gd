@@ -6,7 +6,7 @@ enum CameraModes{BACK,DRIVER,FRONT}
 @export_group("Node References")
 @export var car:VehicleBody3D
 
-const driver_offset = Vector3(-0.3, .8, .2)
+const driver_offset = Vector3(-0.3, .8, .1)
 
 func _ready():
 	_process(0)
