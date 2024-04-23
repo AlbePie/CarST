@@ -3,6 +3,7 @@ keys	en_US
 {label.game_title}	CarST
 {label.public_game}	Public Game
 {label.custom_game}	Custom Game
+{label.public_%d}	Public %d
 -SECTION-	-BUTTONS-
 {button.play}	PLAY
 {button.back}	BACK

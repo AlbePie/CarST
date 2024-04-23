@@ -35,7 +35,7 @@ tracks/0/keys = {
 "method": &"start_fading"
 }, {
 "args": [],
-"method": &"queue_free"
+"method": &"delete_cube"
 }]
 }
 
@@ -46,16 +46,17 @@ _data = {
 }
 
 [node name="Cube01" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 10000, 10000)
 mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_0lm61")
 can_sleep = false
 script = ExtResource("1_awtf3")
 min_length_of_moving_vector = 0.05
 
-[node name="Cube mesh" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_lrp5a")
 
-[node name="Cube collision" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_yqnok")
 
 [node name="DestroyTimer" type="Timer" parent="."]

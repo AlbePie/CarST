@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy4vhrngjcfm"]
+[gd_scene load_steps=11 format=3 uid="uid://cy4vhrngjcfm"]
 
-[ext_resource type="PackedScene" uid="uid://c4jl6q856hd6h" path="res://models/car-hull.glb" id="1_nj0m6"]
+[ext_resource type="PackedScene" uid="uid://c4jl6q856hd6h" path="res://models/cars/car-hull.glb" id="1_nj0m6"]
 [ext_resource type="PackedScene" uid="uid://dtof6b7p5uxeh" path="res://models/car-wheel.glb" id="2_nfuaa"]
 [ext_resource type="Script" path="res://scripts/car.gd" id="2_shp52"]
+[ext_resource type="FontFile" uid="uid://fdt8rh82f1oa" path="res://themes/RubikDirt-Regular.ttf" id="4_s8h4l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_21rxc"]
 bounce = 0.2
@@ -90,5 +91,15 @@ shape = SubResource("BoxShape3D_nveun")
 [node name="Shape4" type="CollisionShape3D" parent="UDDetector"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0.579692, 1.4)
 shape = SubResource("BoxShape3D_o8qkn")
+
+[node name="Nick" type="Label3D" parent="."]
+top_level = true
+visible = false
+billboard = 1
+no_depth_test = true
+text = "Nick"
+font = ExtResource("4_s8h4l")
+font_size = 96
+outline_size = 0
 
 [editable path="Car hull"]

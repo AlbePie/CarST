@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8pm65yormvxa"]
+[gd_scene load_steps=14 format=3 uid="uid://b8pm65yormvxa"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
+[ext_resource type="PackedScene" uid="uid://dxue6c8i7v3sf" path="res://scenes/public_server_template.tscn" id="2_43x13"]
 [ext_resource type="PlaneMesh" uid="uid://bcm8qwbme66mu" path="res://models/grass_1000x1000.tres" id="3_8dfn8"]
 [ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="4_mtpe1"]
 [ext_resource type="Texture2D" uid="uid://btpwpk2f0rtds" path="res://sprites/red.svg" id="5_q5q11"]
@@ -27,10 +28,14 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
 size = Vector3(6, 1, 6)
 
-[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "publicpopup", "colorpicker", "coloroptions")]
+[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "server_key", "publicpopup", "publicserverlist", "nickname", "colorpicker", "coloroptions")]
 script = ExtResource("1_30doa")
 car = NodePath("Car")
+server_key = NodePath("Menu/MenuTabs/{mtab_play}/ServerKey")
 publicpopup = NodePath("Menu/PlayPublicPopup")
+publicserverlist = NodePath("Menu/PlayPublicPopup/UI/Servers/Sort")
+publicserverscene = ExtResource("2_43x13")
+nickname = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Username")
 colorpicker = NodePath("Menu/MenuTabs/{mtab_user_options}/ColorPicker")
 coloroptions = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Options")
 
@@ -154,7 +159,7 @@ size_flags_stretch_ratio = 0.2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DebugButton" type="Button" parent="Menu/MenuTabs/{mtab_play}"]
+[node name="PlayLocal" type="Button" parent="Menu/MenuTabs/{mtab_play}"]
 layout_mode = 2
 theme = ExtResource("4_mtpe1")
 theme_override_font_sizes/font_size = 48
@@ -227,13 +232,16 @@ offset_top = 4.0
 offset_right = 1226.0
 offset_bottom = 714.0
 
-[node name="TODO" type="Label" parent="Menu/PlayPublicPopup/UI"]
-layout_mode = 2
-text = "TODO: Implement public game"
-
-[node name="Filling" type="Control" parent="Menu/PlayPublicPopup/UI"]
+[node name="Servers" type="ScrollContainer" parent="Menu/PlayPublicPopup/UI"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Sort" type="VBoxContainer" parent="Menu/PlayPublicPopup/UI/Servers"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PublicServerTemplate" parent="Menu/PlayPublicPopup/UI/Servers/Sort" instance=ExtResource("2_43x13")]
+layout_mode = 2
 
 [node name="Back" type="Button" parent="Menu/PlayPublicPopup/UI"]
 custom_minimum_size = Vector2(0, 64)
@@ -241,7 +249,8 @@ layout_mode = 2
 text = "{button.back}"
 
 [connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/PlayPublic" to="." method="_on_play_public_pressed"]
-[connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/DebugButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/CustomServer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/PlayLocal" to="." method="_on_play_button_pressed"]
 [connection signal="item_selected" from="Menu/MenuTabs/{mtab_user_options}/Line1/Options" to="." method="_on_color_selected"]
 [connection signal="color_changed" from="Menu/MenuTabs/{mtab_user_options}/ColorPicker" to="." method="_on_color_picker_color_changed"]
 [connection signal="pressed" from="Menu/PlayPublicPopup/UI/Back" to="Menu/PlayPublicPopup" method="hide"]

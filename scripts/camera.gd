@@ -3,8 +3,7 @@ extends Camera3D
 enum CameraModes{BACK,DRIVER,FRONT}
 
 @export var camera_mode = CameraModes.BACK
-@export_group("Node References")
-@export var car:VehicleBody3D
+var car:VehicleBody3D
 
 const driver_offset = Vector3(-0.3, .8, .1)
 
@@ -12,6 +11,14 @@ func _ready():
 	_process(0)
 
 func _process(_delta):
+	if network.game_state == network.GameState.ONLINE_SERVER:
+		return
+	
+	car = get_node_or_null("../%s" % (str(multiplayer.get_unique_id()) if network.game_state == network.GameState.ONLINE_CLIENT \
+		else "Car"))
+	if car == null:
+		return
+	
 	if Input.is_action_just_pressed("back_camera"):
 		@warning_ignore("int_as_enum_without_cast")
 		camera_mode += 1

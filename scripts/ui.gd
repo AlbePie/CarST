@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export_group("Node References")
-@export var car:VehicleBody3D
+var car:VehicleBody3D
 @export var speedmeter:ProgressBar
 @export var speedlabel:Label
 @export var flippedlabel:Label
@@ -13,6 +13,14 @@ var speed_ema = 0
 const speed_momentum = 0.01
 
 func _process(delta):
+	if network.game_state == network.GameState.ONLINE_SERVER:
+		return
+	
+	car = get_node("../%s" % (str(multiplayer.get_unique_id()) if network.game_state == network.GameState.ONLINE_CLIENT \
+		else "Car"))
+	if car == null:
+		return
+	
 	var velocity = Vector2(car.linear_velocity.x, car.linear_velocity.z).length()
 	var speed = clamp(velocity / 40 * 100, 0, 100)
 	var current_momentum = pow(speed_momentum, delta)
@@ -47,8 +55,9 @@ func stop_flipped_flashing():
 		flash_tween = null
 
 func _on_quit_pressed():
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	network.terminate_game()
 
 
 func _on_reset_pressed():
-	get_tree().reload_current_scene()
+	print("reset is not available")
+	# get_tree().reload_current_scene()

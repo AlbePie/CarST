@@ -10,8 +10,10 @@ var detecting = false
 var last_pos = Vector3.ZERO
 @export var min_length_of_moving_vector = 0.001
 
-@onready var cube = $"Cube mesh"
+@onready var cube = $Mesh
 var cube_mat = StandardMaterial3D.new()
+
+var should_be_deleted:bool = false
 
 func _ready():
 	last_pos = position
@@ -41,7 +43,13 @@ func _process(delta):
 func start_fading():
 	fade = true
 	# custom_integrator = true
-	$"Cube collision".disabled = true
+	$Collision.disabled = true
 
 func _on_detect_timer_timeout():
 	detecting = true
+
+func delete_cube():
+	if network.game_state == network.GameState.OFFLINE:
+		queue_free()
+	else:
+		should_be_deleted = true
