@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4ki1hw4wpiwr"]
+
+[ext_resource type="Script" path="res://scripts/map_pick.gd" id="1_77c30"]
+[ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="2_8nhvg"]
+
+[node name="MapPick" type="PopupPanel" node_paths=PackedStringArray("ui", "map_scroll", "map_select")]
+size = Vector2i(1180, 668)
+script = ExtResource("1_77c30")
+ui = NodePath("UI")
+map_scroll = NodePath("UI/MapScroll")
+map_select = NodePath("UI/MapScroll/MapSelect")
+
+[node name="UI" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1176.0
+offset_bottom = 664.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 2
+theme = ExtResource("2_8nhvg")
+theme_override_font_sizes/font_size = 48
+text = "{label.pick_map}"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapScroll" type="ScrollContainer" parent="UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapSelect" type="VBoxContainer" parent="UI/MapScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="popup_hide" from="." to="." method="_on_close_requested"]

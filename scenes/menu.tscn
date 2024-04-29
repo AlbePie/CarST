@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8pm65yormvxa"]
+[gd_scene load_steps=15 format=3 uid="uid://b8pm65yormvxa"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://1faxlonbgrii" path="res://sprites/blue.svg" id="6_h4pgb"]
 [ext_resource type="Texture2D" uid="uid://3ibjexrxobjs" path="res://sprites/green.svg" id="7_7kagc"]
 [ext_resource type="Texture2D" uid="uid://c0pehk2oshcfl" path="res://sprites/yellow.svg" id="8_4mth4"]
+[ext_resource type="PackedScene" uid="uid://d4ki1hw4wpiwr" path="res://scenes/map_pick.tscn" id="10_m0gp0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iy3gq"]
 sky_horizon_color = Color(0.595, 0.70125, 0.85, 1)
@@ -28,13 +29,14 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
 size = Vector3(6, 1, 6)
 
-[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "server_key", "publicpopup", "publicserverlist", "nickname", "colorpicker", "coloroptions")]
+[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "server_key", "publicpopup", "publicserverlist", "map_pick", "nickname", "colorpicker", "coloroptions")]
 script = ExtResource("1_30doa")
 car = NodePath("Car")
 server_key = NodePath("Menu/MenuTabs/{mtab_play}/ServerKey")
 publicpopup = NodePath("Menu/PlayPublicPopup")
 publicserverlist = NodePath("Menu/PlayPublicPopup/UI/Servers/Sort")
 publicserverscene = ExtResource("2_43x13")
+map_pick = NodePath("Menu/MapPick")
 nickname = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Username")
 colorpicker = NodePath("Menu/MenuTabs/{mtab_user_options}/ColorPicker")
 coloroptions = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Options")
@@ -247,6 +249,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "{button.back}"
+
+[node name="MapPick" parent="Menu" instance=ExtResource("10_m0gp0")]
 
 [connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/PlayPublic" to="." method="_on_play_public_pressed"]
 [connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/CustomServer/Join" to="." method="_on_join_pressed"]

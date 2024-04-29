@@ -7,9 +7,10 @@ extends Node3D
 @export_group("Node References")
 @export var car:VehicleBody3D
 @export var server_key:LineEdit
-@export var publicpopup:Window
+@export var publicpopup:PopupPanel
 @export var publicserverlist:VBoxContainer
 @export var publicserverscene:PackedScene
+@export var map_pick:PopupPanel
 @export var nickname:LineEdit
 @export var colorpicker:ColorPicker
 @export var coloroptions:OptionButton
@@ -48,7 +49,11 @@ func _on_color_selected(index):
 
 
 func _on_play_button_pressed():
-	network.start_local("world", "car-hull")
+	var map = await map_pick.get_map()
+	if map == "":
+		return
+	
+	network.start_local(map, "car-hull")
 
 
 func _on_color_picker_color_changed(color):

@@ -4,10 +4,13 @@ keys	en_US
 {label.public_game}	Public Game
 {label.custom_game}	Custom Game
 {label.public_%d}	Public %d
+{label.pick_map}	PICK A MAP
+-SECTION-	-MAP NAMES-
+{map.world}	World
 -SECTION-	-BUTTONS-
 {button.play}	PLAY
 {button.back}	BACK
-{button.play_debug}	Play (Debug)
+{button.play_debug}	Play
 {button.host}	Create game
 {button.join}	Join server
 {button.map_reset}	RESET THE MAP

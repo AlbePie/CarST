@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxue6c8i7v3sf"]
+
+[ext_resource type="Texture2D" uid="uid://c0pehk2oshcfl" path="res://sprites/yellow.svg" id="1_up5if"]
+
+[node name="PublicServerTemplate" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Line1" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Line1"]
+layout_mode = 2
+texture = ExtResource("1_up5if")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ServerName" type="Label" parent="Line1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+text = "{label.public_%d}"
+vertical_alignment = 1
+
+[node name="Online" type="Label" parent="Line1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "%d/8"
+
+[node name="Filling" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Line2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Join" type="Button" parent="Line2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "{button.join}"

@@ -1,0 +1,4 @@
+race - you have to ride through the loops in order to win
+stunts - you get points for stunts, winner is the one who gets the most points
+crash - at the front of the car you have a "shield" that absorbs most of the damage, which is dealt by colliding into something
+restart free ride - restarts map
