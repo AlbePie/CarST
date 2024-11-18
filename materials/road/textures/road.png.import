@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc2xqnjtsu77x"
-path.s3tc="res://.godot/imported/crossing_t.png-8b22f5de9de46450b79db68cb8c153c6.s3tc.ctex"
+uid="uid://34gqfrnbx4o2"
+path.s3tc="res://.godot/imported/road.png-751ba3e3bb8c15f08f51611d55ea9189.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/crossing_t.png"
-dest_files=["res://.godot/imported/crossing_t.png-8b22f5de9de46450b79db68cb8c153c6.s3tc.ctex"]
+source_file="res://materials/road/textures/road.png"
+dest_files=["res://.godot/imported/road.png-751ba3e3bb8c15f08f51611d55ea9189.s3tc.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
-mipmaps/limit=-1
+mipmaps/limit=3
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true

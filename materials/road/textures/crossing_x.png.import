@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c76ln88offlfo"
-path.s3tc="res://.godot/imported/crossing_x.png-8422a51a21cf9e7f7eda33f9f45abf2c.s3tc.ctex"
+path.s3tc="res://.godot/imported/crossing_x.png-e811f81105ebe5ef2d1f39e1a511be66.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/crossing_x.png"
-dest_files=["res://.godot/imported/crossing_x.png-8422a51a21cf9e7f7eda33f9f45abf2c.s3tc.ctex"]
+source_file="res://materials/road/textures/crossing_x.png"
+dest_files=["res://.godot/imported/crossing_x.png-e811f81105ebe5ef2d1f39e1a511be66.s3tc.ctex"]
 
 [params]
 

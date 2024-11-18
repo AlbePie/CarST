@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc0coedkbpqoy"
-path.s3tc="res://.godot/imported/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg-fea7bd8a925c96713e4aaecfa127a62d.s3tc.ctex"
+uid="uid://bc2xqnjtsu77x"
+path.s3tc="res://.godot/imported/crossing_t.png-dc3d4c3d323310c518e6214963530e42.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg"
-dest_files=["res://.godot/imported/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg-fea7bd8a925c96713e4aaecfa127a62d.s3tc.ctex"]
+source_file="res://materials/road/textures/crossing_t.png"
+dest_files=["res://.godot/imported/crossing_t.png-dc3d4c3d323310c518e6214963530e42.s3tc.ctex"]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

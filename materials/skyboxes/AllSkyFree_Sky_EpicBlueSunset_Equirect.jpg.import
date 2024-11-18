@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://34gqfrnbx4o2"
-path.s3tc="res://.godot/imported/road.png-f2d9046f44868dbdf4c12122659d764c.s3tc.ctex"
+uid="uid://cc0coedkbpqoy"
+path.s3tc="res://.godot/imported/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg-60bea9e70f45d49cd78068b392e2d7d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://materials/road.png"
-dest_files=["res://.godot/imported/road.png-f2d9046f44868dbdf4c12122659d764c.s3tc.ctex"]
+source_file="res://materials/skyboxes/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg"
+dest_files=["res://.godot/imported/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg-60bea9e70f45d49cd78068b392e2d7d9.s3tc.ctex"]
 
 [params]
 
@@ -22,8 +22,8 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=3
+mipmaps/generate=true
+mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
