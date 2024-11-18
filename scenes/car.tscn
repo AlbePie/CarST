@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy4vhrngjcfm"]
+[gd_scene load_steps=14 format=3 uid="uid://cy4vhrngjcfm"]
 
 [ext_resource type="PackedScene" uid="uid://c4jl6q856hd6h" path="res://models/cars/car-hull.glb" id="1_nj0m6"]
 [ext_resource type="PackedScene" uid="uid://dtof6b7p5uxeh" path="res://models/car-wheel.glb" id="2_nfuaa"]
 [ext_resource type="Script" path="res://scripts/car.gd" id="2_shp52"]
 [ext_resource type="FontFile" uid="uid://fdt8rh82f1oa" path="res://themes/RubikDirt-Regular.ttf" id="4_s8h4l"]
+[ext_resource type="Material" uid="uid://ddb313mvmpi1e" path="res://materials/exhaust_particles.material" id="5_3h6s2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_21rxc"]
 bounce = 0.2
@@ -23,10 +24,24 @@ size = Vector3(1.2, 0.01, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8qkn"]
 size = Vector3(1.2, 0.01, 0.9)
 
-[node name="Car" type="VehicleBody3D" groups=["client_car"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwlnq"]
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1vm1"]
+material = SubResource("StandardMaterial3D_bwlnq")
+radius = 0.1
+height = 0.2
+
+[node name="Car" type="VehicleBody3D" node_paths=PackedStringArray("uddetector", "exhaust_one", "exhaust_two") groups=["client_car"]]
 mass = 22.0
 physics_material_override = SubResource("PhysicsMaterial_21rxc")
 script = ExtResource("2_shp52")
+uddetector = NodePath("UDDetector")
+exhaust_one = NodePath("Exhaust/One")
+exhaust_two = NodePath("Exhaust/Two")
+exhaust_material = ExtResource("5_3h6s2")
 
 [node name="Car hull" parent="." instance=ExtResource("1_nj0m6")]
 
@@ -96,10 +111,32 @@ shape = SubResource("BoxShape3D_o8qkn")
 top_level = true
 visible = false
 billboard = 1
+double_sided = false
 no_depth_test = true
-text = "Nick"
 font = ExtResource("4_s8h4l")
 font_size = 96
 outline_size = 0
+language = "yao"
+
+[node name="Exhaust" type="Node3D" parent="."]
+process_mode = 3
+
+[node name="One" type="GPUParticles3D" parent="Exhaust"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.452706, 0.159755, -2.20982)
+emitting = false
+amount = 500
+fixed_fps = 60
+local_coords = true
+process_material = ExtResource("5_3h6s2")
+draw_pass_1 = SubResource("SphereMesh_v1vm1")
+
+[node name="Two" type="GPUParticles3D" parent="Exhaust"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.468807, 0.159755, -2.20982)
+emitting = false
+amount = 500
+fixed_fps = 60
+local_coords = true
+process_material = ExtResource("5_3h6s2")
+draw_pass_1 = SubResource("SphereMesh_v1vm1")
 
 [editable path="Car hull"]

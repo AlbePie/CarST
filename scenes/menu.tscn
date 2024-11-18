@@ -29,10 +29,10 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tgxf"]
 size = Vector3(6, 1, 6)
 
-[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "server_key", "publicpopup", "publicserverlist", "map_pick", "nickname", "colorpicker", "coloroptions")]
+[node name="menu" type="Node3D" node_paths=PackedStringArray("car", "serveradress", "publicpopup", "publicserverlist", "map_pick", "nickname", "colorpicker", "coloroptions", "errordialog")]
 script = ExtResource("1_30doa")
 car = NodePath("Car")
-server_key = NodePath("Menu/MenuTabs/{mtab_play}/ServerKey")
+serveradress = NodePath("Menu/MenuTabs/{mtab_play}/ServerAddress")
 publicpopup = NodePath("Menu/PlayPublicPopup")
 publicserverlist = NodePath("Menu/PlayPublicPopup/UI/Servers/Sort")
 publicserverscene = ExtResource("2_43x13")
@@ -40,6 +40,7 @@ map_pick = NodePath("Menu/MapPick")
 nickname = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Username")
 colorpicker = NodePath("Menu/MenuTabs/{mtab_user_options}/ColorPicker")
 coloroptions = NodePath("Menu/MenuTabs/{mtab_user_options}/Line1/Options")
+errordialog = NodePath("ErrorDialog")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h1bor")
@@ -90,9 +91,11 @@ layout_mode = 2
 [node name="MenuTabs" type="TabContainer" parent="Menu"]
 layout_mode = 2
 size_flags_vertical = 3
+current_tab = 0
 
 [node name="{mtab_play}" type="VBoxContainer" parent="Menu/MenuTabs"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="PublicGame" type="Label" parent="Menu/MenuTabs/{mtab_play}"]
 layout_mode = 2
@@ -116,10 +119,11 @@ theme_override_font_sizes/font_size = 48
 text = "{label.custom_game}"
 horizontal_alignment = 1
 
-[node name="ServerKey" type="LineEdit" parent="Menu/MenuTabs/{mtab_play}"]
+[node name="ServerAddress" type="LineEdit" parent="Menu/MenuTabs/{mtab_play}"]
 layout_mode = 2
 theme = ExtResource("4_mtpe1")
-placeholder_text = "{input.server_key}"
+text = "127.0.0.1"
+placeholder_text = "{input.server_address}"
 
 [node name="Filling2" type="Control" parent="Menu/MenuTabs/{mtab_play}"]
 custom_minimum_size = Vector2(0, 32)
@@ -127,18 +131,6 @@ layout_mode = 2
 
 [node name="CustomServer" type="HBoxContainer" parent="Menu/MenuTabs/{mtab_play}"]
 layout_mode = 2
-
-[node name="Filling1" type="Control" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Host" type="Button" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_mtpe1")
-theme_override_font_sizes/font_size = 48
-text = "{button.host}"
 
 [node name="Filling2" type="Control" parent="Menu/MenuTabs/{mtab_play}/CustomServer"]
 layout_mode = 2
@@ -165,11 +157,12 @@ size_flags_vertical = 3
 layout_mode = 2
 theme = ExtResource("4_mtpe1")
 theme_override_font_sizes/font_size = 48
-text = "{button.play_debug}"
+text = "{button.play}"
 
 [node name="{mtab_user_options}" type="VBoxContainer" parent="Menu/MenuTabs"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="Line1" type="HBoxContainer" parent="Menu/MenuTabs/{mtab_user_options}"]
 layout_mode = 2
@@ -178,6 +171,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_mtpe1")
+text = "Anonymouse"
 placeholder_text = "{input.username}"
 max_length = 20
 
@@ -196,11 +190,10 @@ vertical_alignment = 1
 [node name="Options" type="OptionButton" parent="Menu/MenuTabs/{mtab_user_options}/Line1"]
 layout_mode = 2
 theme = ExtResource("4_mtpe1")
-item_count = 5
 selected = 1
+item_count = 5
 popup/item_0/text = "{color.red}"
 popup/item_0/icon = ExtResource("5_q5q11")
-popup/item_0/id = 0
 popup/item_1/text = "{color.blue}"
 popup/item_1/icon = ExtResource("6_h4pgb")
 popup/item_1/id = 1
@@ -251,6 +244,11 @@ layout_mode = 2
 text = "{button.back}"
 
 [node name="MapPick" parent="Menu" instance=ExtResource("10_m0gp0")]
+visible = false
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+title = "{error.error}"
+ok_button_text = "{button.accept}"
 
 [connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/PlayPublic" to="." method="_on_play_public_pressed"]
 [connection signal="pressed" from="Menu/MenuTabs/{mtab_play}/CustomServer/Join" to="." method="_on_join_pressed"]

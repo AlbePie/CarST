@@ -1,3 +1,4 @@
+class_name UI
 extends CanvasLayer
 
 @export_group("Node References")
@@ -12,7 +13,7 @@ var flash_tween:Tween
 var speed_ema = 0
 const speed_momentum = 0.01
 
-func _process(delta):
+func _process(delta) -> void:
 	if network.game_state == network.GameState.ONLINE_SERVER:
 		return
 	
@@ -38,7 +39,7 @@ func _process(delta):
 			start_flipped_flashing()
 			flipped_flashing = true
 
-func start_flipped_flashing():
+func start_flipped_flashing() -> void:
 	stop_flipped_flashing()
 	
 	flash_tween = create_tween()
@@ -48,16 +49,16 @@ func start_flipped_flashing():
 	flash_tween.tween_interval(0.5)
 	flash_tween.tween_callback(self.start_flipped_flashing)
 
-func stop_flipped_flashing():
+func stop_flipped_flashing() -> void:
 	if flash_tween != null:
 		flash_tween.stop()
 		flippedlabel.hide()
 		flash_tween = null
 
-func _on_quit_pressed():
+func _on_quit_pressed() -> void:
 	network.terminate_game()
 
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	print("reset is not available")
 	# get_tree().reload_current_scene()

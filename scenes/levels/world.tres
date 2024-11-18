@@ -1,18 +1,10 @@
-[gd_resource type="Resource" script_class="MapRepresentation" load_steps=4 format=3 uid="uid://v0ko5sycso7m"]
+[gd_resource type="Resource" script_class="Map" load_steps=3 format=3 uid="uid://v0ko5sycso7m"]
 
+[ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_ttgwr"]
 [ext_resource type="Script" path="res://scripts/resources/mapresource.gd" id="1_tv7lf"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_q4vk3"]
-noise_type = 3
-frequency = 0.05
-domain_warp_enabled = true
-domain_warp_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pnca8"]
-noise = SubResource("FastNoiseLite_q4vk3")
 
 [resource]
 script = ExtResource("1_tv7lf")
 map_name = "{map.world}"
 map_scene_code = "world"
-map_icon = SubResource("NoiseTexture2D_pnca8")
+map_icon = ExtResource("1_ttgwr")

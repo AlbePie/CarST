@@ -1,3 +1,4 @@
+class_name BetterCamera
 extends Camera3D
 
 enum CameraModes{BACK,DRIVER,FRONT}
@@ -7,10 +8,10 @@ var car:VehicleBody3D
 
 const driver_offset = Vector3(-0.3, .8, .1)
 
-func _ready():
+func _ready() -> void:
 	_process(0)
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if network.game_state == network.GameState.ONLINE_SERVER:
 		return
 	

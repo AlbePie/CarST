@@ -1,60 +1,58 @@
-[gd_scene load_steps=9 format=3 uid="uid://ce7t654f1lxa7"]
+[gd_scene load_steps=10 format=3 uid="uid://ce7t654f1lxa7"]
 
 [ext_resource type="Script" path="res://scripts/cube_destroy.gd" id="1_awtf3"]
+[ext_resource type="Material" uid="uid://dxy2rf11kx1g8" path="res://materials/cube.material" id="2_ll5fo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0lm61"]
 bounce = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3sab"]
-transparency = 1
-albedo_color = Color(0.65098, 0.372549, 0.0117647, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lrp5a"]
+[sub_resource type="BoxMesh" id="BoxMesh_dfo7e"]
 lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_b3sab")
+material = ExtResource("2_ll5fo")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yqnok"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="Animation" id="Animation_0bbie"]
-length = 0.001
+[sub_resource type="Curve" id="Curve_mu708"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="Animation" id="Animation_7l236"]
-resource_name = "cube_fadeout"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"start_fading"
-}, {
-"args": [],
-"method": &"delete_cube"
-}]
-}
+[sub_resource type="CurveTexture" id="CurveTexture_8m5la"]
+curve = SubResource("Curve_mu708")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ruf"]
-_data = {
-"RESET": SubResource("Animation_0bbie"),
-"cube_fadeout": SubResource("Animation_7l236")
-}
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kim04"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = -132.9
+angle_max = 132.0
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.0
+linear_accel_max = -1.0
+scale_min = 0.5
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_8m5la")
 
-[node name="Cube01" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 10000, 10000)
+[sub_resource type="BoxMesh" id="BoxMesh_iwhml"]
+material = ExtResource("2_ll5fo")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Cube01" type="RigidBody3D" node_paths=PackedStringArray("cube", "collision", "particles")]
 mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_0lm61")
 can_sleep = false
 script = ExtResource("1_awtf3")
 min_length_of_moving_vector = 0.05
+cube = NodePath("Mesh")
+collision = NodePath("Collision")
+particles = NodePath("Explosion")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_lrp5a")
+mesh = SubResource("BoxMesh_dfo7e")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_yqnok")
@@ -63,15 +61,19 @@ shape = SubResource("ConvexPolygonShape3D_yqnok")
 wait_time = 2.0
 one_shot = true
 
-[node name="DestroyAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_b5ruf")
-}
-
 [node name="DetectTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="Explosion" type="GPUParticles3D" parent="."]
+process_mode = 3
+emitting = false
+amount = 1000
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_kim04")
+draw_pass_1 = SubResource("BoxMesh_iwhml")
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="DetectTimer" to="." method="_on_detect_timer_timeout"]

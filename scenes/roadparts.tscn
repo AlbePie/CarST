@@ -1,17 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgt4bhmsb0qdj"]
+[gd_scene load_steps=10 format=3 uid="uid://cgt4bhmsb0qdj"]
 
-[ext_resource type="Texture2D" uid="uid://34gqfrnbx4o2" path="res://materials/road.png" id="1_hi4o6"]
+[ext_resource type="Material" uid="uid://ckdfwmf8to6rh" path="res://materials/road/classic_road.material" id="1_evuf0"]
 [ext_resource type="ArrayMesh" uid="uid://cammg7tr8xhc4" path="res://models/turn.tres" id="2_y6cx8"]
 [ext_resource type="ArrayMesh" uid="uid://b8nanglsqjjsh" path="res://models/cross_x.tres" id="3_2ascu"]
 [ext_resource type="ArrayMesh" uid="uid://ci78f73e2yn6m" path="res://models/cross_t.tres" id="4_m8olt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8i510"]
-cull_mode = 2
-albedo_texture = ExtResource("1_hi4o6")
-uv1_scale = Vector3(6, 1, 1)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_7vr5a"]
-material = SubResource("StandardMaterial3D_8i510")
+material = ExtResource("1_evuf0")
 size = Vector2(8, 7)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iugwd"]

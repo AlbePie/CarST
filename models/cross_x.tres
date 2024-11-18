@@ -1,21 +1,17 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://b8nanglsqjjsh"]
+[gd_resource type="ArrayMesh" load_steps=2 format=4 uid="uid://b8nanglsqjjsh"]
 
-[ext_resource type="Texture2D" uid="uid://c76ln88offlfo" path="res://materials/crossing_x.png" id="1_pvw3c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q60ca"]
-cull_mode = 2
-albedo_texture = ExtResource("1_pvw3c")
+[ext_resource type="Material" uid="uid://bfbspxp23bve3" path="res://materials/road/crossing_x.material" id="1_ywp5x"]
 
 [resource]
 _surfaces = [{
 "aabb": AABB(-4, 0, -4, 8, 1e-05, 8),
-"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 61, 0, 0, 128, 61, 0, 0, 128, 61, 0, 0, 128, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 112, 63, 0, 0, 128, 61, 0, 0, 112, 63, 0, 0, 128, 61, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 61, 0, 0, 112, 63, 0, 0, 128, 61, 0, 0, 112, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 112, 63, 0, 0, 112, 63, 0, 0, 112, 63, 0, 0, 112, 63, 0, 0, 128, 63),
+"attribute_data": PackedByteArray("AAAAAAAAgD0AAIA9AACAPQAAgD0AAAAAAAAAAAAAcD8AAIA9AABwPwAAgD0AAIA/AACAPwAAgD0AAHA/AACAPQAAcD8AAAAAAACAPwAAcD8AAHA/AABwPwAAcD8AAIA/"),
 "format": 34359742487,
 "index_count": 18,
-"index_data": PackedByteArray(1, 0, 2, 0, 8, 0, 1, 0, 8, 0, 7, 0, 0, 0, 6, 0, 3, 0, 3, 0, 6, 0, 9, 0, 5, 0, 4, 0, 10, 0, 5, 0, 10, 0, 11, 0),
-"material": SubResource("StandardMaterial3D_q60ca"),
+"index_data": PackedByteArray("AQACAAgAAQAIAAcAAAAGAAMAAwAGAAkABQAEAAoABQAKAAsA"),
+"material": ExtResource("1_ywp5x"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 12,
-"vertex_data": PackedByteArray(0, 0, 128, 192, 0, 0, 0, 0, 0, 0, 96, 192, 0, 0, 96, 192, 0, 0, 0, 0, 0, 0, 96, 192, 0, 0, 96, 192, 0, 0, 0, 0, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 0, 0, 0, 0, 96, 64, 0, 0, 96, 192, 0, 0, 0, 0, 0, 0, 96, 64, 0, 0, 96, 192, 0, 0, 0, 0, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 0, 0, 0, 0, 96, 192, 0, 0, 96, 64, 0, 0, 0, 0, 0, 0, 96, 192, 0, 0, 96, 64, 0, 0, 0, 0, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 0, 0, 0, 0, 96, 64, 0, 0, 96, 64, 0, 0, 0, 0, 0, 0, 96, 64, 0, 0, 96, 64, 0, 0, 0, 0, 0, 0, 128, 64, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128, 255, 127, 255, 255, 0, 0, 0, 128)
+"vertex_data": PackedByteArray("AACAwAAAAAAAAGDAAABgwAAAAAAAAGDAAABgwAAAAAAAAIDAAACAwAAAAAAAAGBAAABgwAAAAAAAAGBAAABgwAAAAAAAAIBAAACAQAAAAAAAAGDAAABgQAAAAAAAAGDAAABgQAAAAAAAAIDAAACAQAAAAAAAAGBAAABgQAAAAAAAAGBAAABgQAAAAAAAAIBA/3///wAAAID/f///AAAAgP9///8AAACA/3///wAAAID/f///AAAAgP9///8AAACA/3///wAAAID/f///AAAAgP9///8AAACA/3///wAAAID/f///AAAAgP9///8AAACA")
 }]

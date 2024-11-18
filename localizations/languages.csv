@@ -11,12 +11,12 @@ keys	en_US
 {button.play}	PLAY
 {button.back}	BACK
 {button.play_debug}	Play
-{button.host}	Create game
+{button.accept}	OK
 {button.join}	Join server
 {button.map_reset}	RESET THE MAP
 {button.menu_quit}	QUIT TO MENU
 -SECTION-	-INPUTS-
-{input.server_key}	Enter server key here
+{input.server_address}	Enter server adress
 {input.color}	Color: 
 {input.username}	Your username
 -SECTION-	-COLORS-
@@ -30,3 +30,9 @@ keys	en_US
 {mtab_user_options}	  User Options  
 -SECTION-	-HINTS-
 {hint.r_flip}	Press R to flip yourself
+-SECTION-	-ERRORS-
+{error.error}	An error occured:
+{error.emptyaddress}	Server address is empty
+{error.invalidport}	Port is not valid (must be an integer between 1,000 and 50,000)
+{error.emptynick}	Your nickname is empty
+{error.stringerror}	An error occured: %s

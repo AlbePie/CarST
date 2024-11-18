@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SSRProperties" load_steps=2 format=3 uid="uid://cxodv4qt4ubid"]
+
+[ext_resource type="Script" path="res://scripts/resources/ssr_properties.gd" id="1_vyrdx"]
+
+[resource]
+script = ExtResource("1_vyrdx")
+ssr_intensity = 0.1
+ssr_max_distance = 15.0
+ssr_max_guess_steps = 100
+ssr_correction_steps = 10
+ssr_thickness = 0.5

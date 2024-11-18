@@ -5,6 +5,7 @@
 
 [node name="MapPick" type="PopupPanel" node_paths=PackedStringArray("ui", "map_scroll", "map_select")]
 size = Vector2i(1180, 668)
+visible = true
 script = ExtResource("1_77c30")
 ui = NodePath("UI")
 map_scroll = NodePath("UI/MapScroll")

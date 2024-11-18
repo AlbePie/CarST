@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3xhpq4tfaueq"]
+[gd_scene load_steps=20 format=3 uid="uid://c3xhpq4tfaueq"]
 
 [ext_resource type="PlaneMesh" uid="uid://bcm8qwbme66mu" path="res://models/grass_1000x1000.tres" id="1_rrs1a"]
 [ext_resource type="MeshLibrary" uid="uid://cdgctny28fxhl" path="res://models/terrainparts.tres" id="2_8dp5m"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="6_pab1d"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="7_trn3o"]
 [ext_resource type="PackedScene" uid="uid://dbjhjrattxtu8" path="res://scenes/ui.tscn" id="9_af0rd"]
+[ext_resource type="Script" path="res://scripts/minigames.gd" id="10_tj3pw"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="10_yv7sy"]
+[ext_resource type="PackedScene" uid="uid://bnvmibrcoxe3y" path="res://scenes/minigame_start_zone.tscn" id="11_ou0tx"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wi6lg"]
 points = PackedVector3Array(-100, 0, -100, -100, 0, 100, 100, 0, -100, 100, 0, 100)
@@ -395,7 +397,21 @@ flippedlabel = NodePath("FlippedLabel")
 visible_characters = 0
 visible_ratio = 0.0
 
+[node name="Minigames" type="Node3D" parent="."]
+script = ExtResource("10_tj3pw")
+
+[node name="StartZones" type="Node3D" parent="Minigames"]
+
+[node name="Race" parent="Minigames/StartZones" instance=ExtResource("11_ou0tx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 1.5, 97)
+zone_size = 10
+zone_color = Color(0, 0.129412, 0.4, 1)
+minigame_name = "Race"
+
+[node name="RaceRings" type="Node3D" parent="Minigames"]
+
 [connection signal="pressed" from="Cars/UI/Quit" to="Cars/UI" method="_on_quit_pressed"]
 [connection signal="pressed" from="Cars/UI/Reset" to="Cars/UI" method="_on_reset_pressed"]
+[connection signal="car_amount_changed" from="Minigames/StartZones/Race" to="Minigames" method="vote_for_minigame" binds= [1]]
 
 [editable path="Cars/UI"]

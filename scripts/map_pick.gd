@@ -1,3 +1,4 @@
+class_name MapPicker
 extends PopupPanel
 
 @export_group("Node References")
@@ -9,12 +10,14 @@ const map_scene = preload("res://scenes/map_select_template.tscn")
 
 signal _map_value_changed(map:String)
 
-func _ready():
+func _ready() -> void:
+	hide()
+	
 	map_scroll.set.call_deferred("scroll_vertical", 0)
 	map_select.custom_minimum_size.y = 0
 	
 	var maps = management.get_maps()
-	for map:MapRepresentation in maps:
+	for map in maps:
 		var map_instance = map_scene.instantiate()
 		map_select.custom_minimum_size.y += map_instance.custom_minimum_size.y
 		
@@ -25,13 +28,13 @@ func _ready():
 		
 		map_select.add_child(map_instance)
 
-func get_map():
+func get_map() -> String:
 	popup_centered(get_tree().get_root().size - Vector2i.ONE * 50)
 	return await _map_value_changed
 
 
-func _on_close_requested():
+func _on_close_requested() -> void:
 	_map_value_changed.emit("")
 
-func _send_map_value(code:String):
+func _send_map_value(code:String) -> void:
 	_map_value_changed.emit(code)

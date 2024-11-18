@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnvmibrcoxe3y"]
+
+[ext_resource type="Script" path="res://scripts/minigame_start_zone.gd" id="1_5a6s8"]
+[ext_resource type="FontFile" uid="uid://fdt8rh82f1oa" path="res://themes/RubikDirt-Regular.ttf" id="2_rb1gc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtkdn"]
+size = Vector3(5, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io65s"]
+transparency = 4
+albedo_color = Color(0, 0.129412, 0.4, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wlfnm"]
+material = SubResource("StandardMaterial3D_io65s")
+size = Vector3(10, 3, 3)
+
+[node name="MinigameStartZone" type="Node3D"]
+script = ExtResource("1_5a6s8")
+
+[node name="Zone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Zone"]
+shape = SubResource("BoxShape3D_jtkdn")
+
+[node name="Mesh" type="MeshInstance3D" parent="Zone"]
+mesh = SubResource("BoxMesh_wlfnm")
+skeleton = NodePath("../..")
+
+[node name="BordersAndText" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Border1" type="CSGBox3D" parent="BordersAndText"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
+size = Vector3(0.5, 4, 0.5)
+
+[node name="Border2" type="CSGBox3D" parent="BordersAndText"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 0)
+size = Vector3(0.5, 4, 0.5)
+
+[node name="TextLine" type="CSGBox3D" parent="BordersAndText"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+size = Vector3(6, 1, 0.5)
+
+[node name="Text" type="Label3D" parent="BordersAndText/TextLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+font = ExtResource("2_rb1gc")
+font_size = 128
+outline_size = 0
+
+[connection signal="body_entered" from="Zone" to="." method="_on_zone_body_entered"]
+[connection signal="body_exited" from="Zone" to="." method="_on_zone_body_exited"]
