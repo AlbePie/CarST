@@ -27,6 +27,11 @@ extends ShaderMaterial
 		for param in params.keys():
 			set_shader_parameter(param, params[param])
 
+@export var ssr_intensity_texture:Texture2D:
+	set(val):
+		ssr_intensity_texture = val
+		set_shader_parameter("ssrIntensityTexture", val)
+
 func insert_ssr(code:String) -> String:
 	var variables = RegEx.create_from_string("uniform .+;")
 	var last_match = variables.search_all(code)[-1]

@@ -21,6 +21,20 @@ var uses_custom_color = false
 
 var colors = [Color("770f0f"), Color("0f0f77"), Color("0f550f"), Color("bbbb1f")]
 
+
+func export_textures() -> void: # exports noise textures to pngs
+	var img1 = preload("res://materials/road/textures/noise/noise1_256_1024.tres")
+	var img2 = preload("res://materials/road/textures/noise/noise1_1170_1170.tres")
+	var img3 = preload("res://materials/road/textures/noise/noise2_256_1024.tres")
+	var img4 = preload("res://materials/road/textures/noise/noise2_1170_1170.tres")
+	
+	await get_tree().process_frame
+	
+	img1.get_image().save_png("res://materials/road/textures/noise/noise1_256_1024.png")
+	img2.get_image().save_png("res://materials/road/textures/noise/noise1_1170_1170.png")
+	img3.get_image().save_png("res://materials/road/textures/noise/noise2_256_1024.png")
+	img4.get_image().save_png("res://materials/road/textures/noise/noise2_1170_1170.png")
+
 func _ready() -> void:
 	if DisplayServer.get_name() == "headless":
 		network.start_server()
