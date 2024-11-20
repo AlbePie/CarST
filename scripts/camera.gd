@@ -36,8 +36,8 @@ func _process(_delta) -> void:
 	
 	match camera_mode:
 		CameraModes.DRIVER:
-			position = car.driver_marker.global_position
-			rotation = car.driver_marker.global_rotation
+			global_position = car.driver_marker.global_position
+			global_rotation = car.driver_marker.global_rotation
 		_: # BACK AND FRONT
 			var cast = car.back_raycast if camera_mode == CameraModes.BACK else car.front_raycast
 			var castend = cast.get_node("CastEnd").global_position
