@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ssr_material.gd" id="1_wrg5q"]
 [ext_resource type="Resource" uid="uid://ve3bkvcjobd2" path="res://materials/cars/car_ssr_properties.tres" id="2_s8g0g"]
 
-[sub_resource type="Shader" id="Shader_4faoc"]
+[sub_resource type="Shader" id="Shader_wybud"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
 
 shader_type spatial;
@@ -11,6 +11,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float alpha_hash_scale : hint_range(0.0, 2.0, 0.01);
 uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
 uniform float roughness : hint_range(0.0, 1.0);
@@ -56,14 +57,17 @@ void fragment() {
 	vec3 emission_tex = texture(texture_emission, base_uv).rgb;
 	// Emission Operator: Add
 	EMISSION = (emission.rgb + emission_tex) * emission_energy;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA_HASH_SCALE = alpha_hash_scale;
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ns3xj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4h5w"]
 resource_name = "Body"
 render_priority = 0
-shader = SubResource("Shader_4faoc")
-shader_parameter/albedo = Color(0.44444, 0.0423525, 0.0706801, 1)
+shader = SubResource("Shader_wybud")
+shader_parameter/albedo = Color(0.44, 0.044, 0.0704, 1)
+shader_parameter/alpha_hash_scale = 0.01
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.1
 shader_parameter/metallic_texture_channel = null
@@ -76,7 +80,7 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
-[sub_resource type="Shader" id="Shader_y177h"]
+[sub_resource type="Shader" id="Shader_2peix"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
 
 shader_type spatial;
@@ -84,6 +88,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float alpha_hash_scale : hint_range(0.0, 2.0, 0.01);
 uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
 uniform float roughness : hint_range(0.0, 1.0);
@@ -130,14 +135,17 @@ void fragment() {
 	vec3 emission_tex = texture(texture_emission, base_uv).rgb;
 	// Emission Operator: Add
 	EMISSION = (emission.rgb + emission_tex) * emission_energy;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA_HASH_SCALE = alpha_hash_scale;
 	ALBEDO = applySSR(ALBEDO);
 }
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2qphg"]
 render_priority = 0
-shader = SubResource("Shader_y177h")
-shader_parameter/albedo = Color(0.44444, 0.0423525, 0.0706801, 1)
+shader = SubResource("Shader_2peix")
+shader_parameter/albedo = Color(0.44, 0.044, 0.0704, 1)
+shader_parameter/alpha_hash_scale = 0.01
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.1
 shader_parameter/metallic_texture_channel = null
@@ -155,14 +163,17 @@ shader_parameter/ssrMaxGuessSteps = 100
 shader_parameter/ssrCorrectionSteps = 10
 shader_parameter/ssrThickness = 0.5
 script = ExtResource("1_wrg5q")
-base_shader = SubResource("ShaderMaterial_ns3xj")
+base_shader = SubResource("ShaderMaterial_a4h5w")
 ssr_propeties = ExtResource("2_s8g0g")
 
 [resource]
 resource_name = "Body"
 next_pass = SubResource("ShaderMaterial_2qphg")
+transparency = 3
+alpha_hash_scale = 0.01
+alpha_antialiasing_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.44444, 0.0423525, 0.0706801, 1)
+albedo_color = Color(0.44, 0.044, 0.0704, 1)
 metallic = 0.1
 roughness = 0.1
 emission_enabled = true

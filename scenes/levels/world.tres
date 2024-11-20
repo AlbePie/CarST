@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Map" load_steps=3 format=3 uid="uid://v0ko5sycso7m"]
 
-[ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_ttgwr"]
+[ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/skyboxes/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_ttgwr"]
 [ext_resource type="Script" path="res://scripts/resources/mapresource.gd" id="1_tv7lf"]
 
 [resource]

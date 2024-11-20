@@ -2,8 +2,11 @@
 
 [resource]
 resource_name = "Body"
+transparency = 3
+alpha_hash_scale = 0.01
+alpha_antialiasing_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.44444, 0.0423525, 0.0706801, 1)
+albedo_color = Color(0.44, 0.044, 0.0704, 1)
 metallic = 0.1
 roughness = 0.1
 emission_enabled = true

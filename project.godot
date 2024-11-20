@@ -86,6 +86,11 @@ back_camera={
 
 locale/translations=PackedStringArray("res://localizations/languages.en_US.translation")
 
+[layer_names]
+
+3d_physics/layer_1="Everything"
+3d_physics/layer_2="Blocks camera"
+
 [rendering]
 
 renderer/rendering_method="mobile"
