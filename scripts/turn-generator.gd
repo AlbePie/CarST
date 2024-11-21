@@ -44,5 +44,4 @@ func do_compiling():
 	surface_array[Mesh.ARRAY_NORMAL] = normals
 	surface_array[Mesh.ARRAY_INDEX] = indices
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
-	print(mesh.surface_get_format(0))
 	ResourceSaver.save(mesh, "res://models/turn.tres", ResourceSaver.FLAG_NONE)
