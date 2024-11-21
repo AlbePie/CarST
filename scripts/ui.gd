@@ -19,7 +19,7 @@ func _process(delta) -> void:
 	if network.game_state == network.GameState.ONLINE_SERVER:
 		return
 	
-	car = get_node("../%s" % (str(multiplayer.get_unique_id()) if network.game_state == network.GameState.ONLINE_CLIENT \
+	car = get_node_or_null("../%s" % (str(multiplayer.get_unique_id()) if network.game_state == network.GameState.ONLINE_CLIENT \
 		else "Car"))
 	if car == null:
 		return
