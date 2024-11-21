@@ -9,6 +9,8 @@ extends MeshInstance3D
 			do_compiling()
 
 func do_compiling():
+	mesh = ArrayMesh.new()
+	
 	var inner_radius = 8.5
 	var outer_radius = 15.5
 	var segments = 16
@@ -42,4 +44,5 @@ func do_compiling():
 	surface_array[Mesh.ARRAY_NORMAL] = normals
 	surface_array[Mesh.ARRAY_INDEX] = indices
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
+	print(mesh.surface_get_format(0))
 	ResourceSaver.save(mesh, "res://models/turn.tres", ResourceSaver.FLAG_NONE)

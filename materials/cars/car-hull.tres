@@ -80,7 +80,7 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
-[sub_resource type="Shader" id="Shader_2peix"]
+[sub_resource type="Shader" id="Shader_hsrjc"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
 
 shader_type spatial;
@@ -143,7 +143,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2qphg"]
 render_priority = 0
-shader = SubResource("Shader_2peix")
+shader = SubResource("Shader_hsrjc")
 shader_parameter/albedo = Color(0.44, 0.044, 0.0704, 1)
 shader_parameter/alpha_hash_scale = 0.01
 shader_parameter/point_size = 1.0

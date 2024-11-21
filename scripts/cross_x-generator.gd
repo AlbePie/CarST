@@ -1,4 +1,4 @@
-# THIS SCRIPT IS NOT USED IN-GAME, IT'S A TOOL TO GENERATE THE X CROSS MODEL
+# THIS SCRIPT IS NOT USED IN-GAME, IT'S A TOOL TO GENERATE THE X AND T CROSS MODEL
 @tool
 extends MeshInstance3D
 
@@ -11,6 +11,7 @@ extends MeshInstance3D
 
 func do_compiling():
 	mesh = ArrayMesh.new()
+	
 	var surface_array = []
 	surface_array.resize(Mesh.ARRAY_MAX)
 	var verts = PackedVector3Array()
