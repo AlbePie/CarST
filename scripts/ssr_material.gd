@@ -17,6 +17,18 @@ extends ShaderMaterial
 	get:
 		return base_shader
 
+func insert_ssr(code:String) -> String:
+	var variables = RegEx.create_from_string("uniform .+;")
+	var last_match = variables.search_all(code)[-1]
+	code = code.insert(last_match.get_end(), '\n#include "res://scripts/shaders/ssr.gdshaderinc"')
+	
+	var fragment = RegEx.create_from_string("void fragment\\(\\) {[\\s\\S]+}")
+	var fmatch = fragment.search(code)
+	code = code.insert(fmatch.get_end() - 1, "\tALBEDO = applySSR(ALBEDO);\n")
+	
+	return code
+
+
 @export var ssr_propeties:SSRProperties:
 	set(val):
 		if val == null:
@@ -31,14 +43,3 @@ extends ShaderMaterial
 	set(val):
 		ssr_intensity_texture = val
 		set_shader_parameter("ssrIntensityTexture", val)
-
-func insert_ssr(code:String) -> String:
-	var variables = RegEx.create_from_string("uniform .+;")
-	var last_match = variables.search_all(code)[-1]
-	code = code.insert(last_match.get_end(), '\n#include "res://scripts/shaders/ssr.gdshaderinc"')
-	
-	var fragment = RegEx.create_from_string("void fragment\\(\\) {[\\s\\S]+}")
-	var fmatch = fragment.search(code)
-	code = code.insert(fmatch.get_end() - 1, "\tALBEDO = applySSR(ALBEDO);\n")
-	
-	return code

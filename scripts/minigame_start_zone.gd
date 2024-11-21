@@ -2,6 +2,7 @@
 class_name MinigameStartZone
 extends Node3D
 
+
 @export var zone_size:int = 5:
 	set(val):
 		if val < 5:
@@ -33,7 +34,6 @@ extends Node3D
 		
 		minigame_name = val
 
-
 var bodies_in = []
 
 signal car_amount_changed(amount:int)
@@ -43,7 +43,6 @@ func _on_zone_body_entered(body) -> void:
 	if body is Car:
 		bodies_in.append(body)
 		car_amount_changed.emit(len(bodies_in))
-
 
 func _on_zone_body_exited(body) -> void:
 	if body is Car:

@@ -1,6 +1,7 @@
 class_name UI
 extends CanvasLayer
 
+
 @export_group("Node References")
 var car:VehicleBody3D
 @export var speedmeter:ProgressBar
@@ -12,6 +13,7 @@ var flash_tween:Tween
 
 var speed_ema = 0
 const speed_momentum = 0.01
+
 
 func _process(delta) -> void:
 	if network.game_state == network.GameState.ONLINE_SERVER:

@@ -4,8 +4,10 @@ extends Node
 
 var motor_running:bool
 
+
 func _init(mrun:bool) -> void:
 	motor_running = mrun
+
 
 func to_bytes() -> PackedByteArray:
 	return var_to_bytes([motor_running])

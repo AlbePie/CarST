@@ -1,6 +1,7 @@
 class_name ManagementSingleton
 extends Node
 
+
 # CAR COLOR
 var car_color = Color(11. / 255, 11. / 255, 88. / 255)
 
@@ -9,6 +10,7 @@ signal color_updated
 func set_color(to:Color) -> void:
 	car_color = to
 	color_updated.emit()
+
 
 # GET MAP
 const level_path = "res://scenes/levels/"
@@ -27,6 +29,7 @@ func get_maps() -> Array[Map]:
 		result.append(cfg)
 	
 	return result
+
 
 func _ready():
 	randomize()

@@ -2,6 +2,7 @@
 @tool
 extends MeshInstance3D
 
+
 @export var compile = false:
 	set(val):
 		compile = false

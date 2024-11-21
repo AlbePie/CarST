@@ -1,14 +1,15 @@
 class_name MapState
 extends Resource
 
+
 var cars:Dictionary = {}
 var blocks:Dictionary = {}
+
 
 func _init(cars_init:Dictionary = {}, blocks_init:Dictionary = {}) -> void:
 	cars = cars_init
 	blocks = blocks_init
 
-@warning_ignore("unused_parameter")
 func compare_to(other:MapState) -> MapState:
 	var compared_cars = {}
 	var compared_blocks = {}

@@ -1,6 +1,7 @@
 class_name Car
 extends VehicleBody3D
 
+
 var hull_material = preload("res://materials/cars/car-hull.tres")
 
 @export var uddetector:Area3D

@@ -1,6 +1,7 @@
 class_name MapPicker
 extends PopupPanel
 
+
 @export_group("Node References")
 @export var ui:VBoxContainer
 @export var map_scroll:ScrollContainer
@@ -9,6 +10,7 @@ extends PopupPanel
 const map_scene = preload("res://scenes/map_select_template.tscn")
 
 signal _map_value_changed(map:String)
+
 
 func _ready() -> void:
 	hide()

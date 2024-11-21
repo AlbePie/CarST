@@ -12,7 +12,6 @@ var PORT_RANGE = range(1001, 50001):
 
 
 # SERVER STARTUP
-
 func start_server() -> void:
 	var params = {}
 	for param in OS.get_cmdline_args():
@@ -56,7 +55,6 @@ func get_map_scene(map:String) -> PackedScene:
 	return load(get_map_scene_full_path(map))
 
 # SERVER CODE
-
 var server_map_path:String
 var clients = {} # stored in format client_id:ClientData
 var car_scene:PackedScene = load("res://scenes/car.tscn")
@@ -180,7 +178,6 @@ func get_client_data(client_id:int) -> ClientData:
 
 
 # CLIENT STARTUP
-
 var client_connected = false
 
 func start_client(adress:String, port:int, nickname:String, car_model:String, color:Color) -> int:
@@ -241,6 +238,7 @@ func set_client_state(state_bytes:PackedByteArray) -> void:
 		for prop_path in cube_vals.keys():
 			cube.set(prop_path, cube_vals[prop_path])
 
+
 func _physics_process(_delta) -> void:
 	if game_state == GameState.ONLINE_CLIENT and client_connected:
 		if multiplayer.multiplayer_peer.get_connection_status() == multiplayer.multiplayer_peer.CONNECTION_DISCONNECTED:
@@ -256,7 +254,6 @@ func _physics_process(_delta) -> void:
 		})
 
 # BOTH ONLINE MODES
-
 @rpc("authority", "call_remote", "reliable")
 func add_local_car(id:int, car_data_bytes:PackedByteArray) -> Car:
 	var car_data = ClientData.from_bytes(car_data_bytes)
@@ -287,7 +284,6 @@ func get_cube(path) -> DestroyableCube:
 	return get_child(0).get_node_or_null("Map/Cubes/Wall%s/Cube%s" % path)
 
 # LOCAL GAME
-
 func start_local(map:String, _model:String) -> void:
 	game_state = GameState.OFFLINE
 	
@@ -299,7 +295,6 @@ func start_local(map:String, _model:String) -> void:
 	get_child(0).get_node("Cars").add_child(car)
 
 # MISC
-
 func terminate_game() -> void:
 	if game_state == GameState.MENU:
 		return

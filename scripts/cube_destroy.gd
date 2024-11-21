@@ -1,6 +1,7 @@
 class_name DestroyableCube
 extends RigidBody3D
 
+
 @export_category("Destroyable Cube")
 @export var destroy = true # If the cube will destroy after collision
 
@@ -15,9 +16,9 @@ var last_pos = Vector3.ZERO
 
 var should_be_deleted:bool = false
 
+
 func _ready() -> void:
 	last_pos = position
-
 
 func _on_destroy_timer_timeout() -> void:
 	delete_cube()

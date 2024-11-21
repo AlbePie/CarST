@@ -2,6 +2,7 @@
 @tool
 extends MeshInstance3D
 
+
 @export_enum("X", "T") var mode:String = "X"
 @export var compile = false:
 	set(val):

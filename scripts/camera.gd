@@ -1,6 +1,7 @@
 class_name BetterCamera
 extends Camera3D
 
+
 enum CameraModes{REAR,DRIVER,FRONT}
 
 @export var camera_mode = CameraModes.REAR
@@ -15,6 +16,7 @@ const MAX_POSITION_LENGTH = 8
 
 var position_length_ema = MAX_POSITION_LENGTH
 const POSITION_LENGTH_MOMENTUM = 0.99
+
 
 func _ready() -> void:
 	_process(0)
