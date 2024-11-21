@@ -1,9 +1,9 @@
 class_name BetterCamera
 extends Camera3D
 
-enum CameraModes{BACK,DRIVER,FRONT}
+enum CameraModes{REAR,DRIVER,FRONT}
 
-@export var camera_mode = CameraModes.BACK
+@export var camera_mode = CameraModes.REAR
 var car:Car
 
 @export_group("Raycasts")
@@ -41,11 +41,11 @@ func _process(_delta) -> void:
 		CameraModes.DRIVER:
 			global_position = car.driver_marker.global_position
 			global_rotation = car.driver_marker.global_rotation
-		_: # BACK AND FRONT
+		_: # REAR AND FRONT
 			var cast = (
 				raycast_back
 				if (
-					camera_mode == CameraModes.BACK and not Input.is_action_pressed("switch_camera_hold") or
+					camera_mode == CameraModes.REAR and not Input.is_action_pressed("switch_camera_hold") or
 					camera_mode == CameraModes.FRONT and Input.is_action_pressed("switch_camera_hold")
 				) else 
 				raycast_front

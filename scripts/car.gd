@@ -3,7 +3,6 @@ extends VehicleBody3D
 
 var hull_material = preload("res://materials/cars/car-hull.tres")
 
-@export var model:MeshInstance3D
 @export var uddetector:Area3D
 @export var exhaust_one:GPUParticles3D
 @export var exhaust_two:GPUParticles3D
