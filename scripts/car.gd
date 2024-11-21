@@ -10,10 +10,6 @@ var hull_material = preload("res://materials/cars/car-hull.tres")
 @export var exhaust_material:ParticleProcessMaterial
 
 @export_group("Camera")
-@export_subgroup("Raycasts")
-@export var back_raycast:RayCast3D
-@export var front_raycast:RayCast3D
-@export_subgroup("")
 @export var driver_marker:Marker3D
 @export_group("")
 

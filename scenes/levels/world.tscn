@@ -379,11 +379,37 @@ shadow_bias = 0.02
 
 [node name="Cars" type="Node3D" parent="."]
 
-[node name="Camera" type="Camera3D" parent="Cars"]
+[node name="Camera" type="Node3D" parent="Cars"]
+
+[node name="Camera" type="Camera3D" parent="Cars/Camera" node_paths=PackedStringArray("raycast_back", "raycast_front")]
 process_mode = 3
 transform = Transform3D(-1, -2.26267e-08, -8.44439e-08, 0, 0.965926, -0.258819, 8.74228e-08, -0.258819, -0.965926, 0, 3.11372, -4.68681)
 current = true
 script = ExtResource("7_trn3o")
+raycast_back = NodePath("../Raycasts/Back")
+raycast_front = NodePath("../Raycasts/Front")
+
+[node name="Raycasts" type="Node3D" parent="Cars/Camera"]
+
+[node name="Back" type="RayCast3D" parent="Cars/Camera/Raycasts"]
+transform = Transform3D(1, 0, 0, 0, -0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0)
+enabled = false
+target_position = Vector3(0, -8, 0)
+collision_mask = 2
+debug_shape_thickness = 5
+
+[node name="CastEnd" type="Marker3D" parent="Cars/Camera/Raycasts/Back"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+
+[node name="Front" type="RayCast3D" parent="Cars/Camera/Raycasts"]
+transform = Transform3D(-1, 8.74227e-08, 0, -4.37114e-08, -0.5, -0.866025, -7.57103e-08, -0.866025, 0.5, 0, 0, 0)
+enabled = false
+target_position = Vector3(0, -8, 0)
+collision_mask = 2
+debug_shape_thickness = 5
+
+[node name="CastEnd" type="Marker3D" parent="Cars/Camera/Raycasts/Front"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
 
 [node name="CarStart" type="Marker3D" parent="Cars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 6, -37)
