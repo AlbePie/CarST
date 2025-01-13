@@ -3,8 +3,21 @@ class_name SSRMaterial
 extends ShaderMaterial
 
 
+@export_file("*.material") var base_shader_path:
+	set(val):
+		if not Engine.is_editor_hint():
+			return
+		base_shader_path = val
+		if val != null and FileAccess.file_exists(val):
+			var mat = load(val)
+			if mat is Material:
+				base_shader = mat.duplicate()
+
 @export var base_shader:Material:
 	set(val):
+		if val != null:
+			val.next_pass = null
+		
 		base_shader = val
 		if val is ShaderMaterial:
 			shader = Shader.new()
@@ -14,6 +27,8 @@ extends ShaderMaterial
 			for param in params:
 				var value = val.get_shader_parameter(param.name)
 				set_shader_parameter(param.name, value)
+			
+			print("SSR shader has been updated")
 	get:
 		return base_shader
 

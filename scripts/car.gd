@@ -2,7 +2,7 @@ class_name Car
 extends VehicleBody3D
 
 
-var hull_material = preload("res://materials/cars/car-hull.tres")
+var hull_material = preload("res://materials/cars/car-hull.material")
 
 @export var uddetector:Area3D
 @export var exhaust_one:GPUParticles3D

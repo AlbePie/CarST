@@ -1,7 +1,6 @@
 How to use screen-space reflections:
-	1) Duplicate your material.
-	2) Add a SSRMaterial to the next pass of the original material.
-	3) Create new SSRProperties resource and save it.
-	4) Assign the SSRProperties resource you have created to the SSRMaterial.
-	5) Load your duplicated material to the base_shader property of the SSRMaterial.
-	6) Convert the duplicated material to a ShaderMaterial.
+	1) Add a SSRMaterial to the next pass of the material.
+	2) Create new SSRProperties resource and save it.
+	3) Assign the SSRProperties resource you have created to the SSRMaterial.
+	4) Load your material to the base_shader_path property of the SSRMaterial.
+	5) Convert the base_shader to a ShaderMaterial.
