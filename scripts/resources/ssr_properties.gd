@@ -4,10 +4,14 @@ extends Resource
 
 
 @export_range(0, 1) var ssr_intensity:float = 0.5
-@export var ssr_max_distance:float = 15.0
+@export var ssr_max_distance:float = 15.0:
+	set(val):
+		ssr_max_distance = abs(val)
 @export_range(1, 1000) var ssr_max_guess_steps:int = 100
 @export_range(1, 1000) var ssr_correction_steps:int = 10
-@export var ssr_thickness:float = 0.5
+@export var ssr_thickness:float = 0.5:
+	set(val):
+		ssr_thickness = abs(val)
 
 
 func get_as_shader_parameters() -> Dictionary:
