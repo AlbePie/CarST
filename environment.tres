@@ -1,0 +1,15 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://snjqrtu4e13a"]
+
+[ext_resource type="Texture2D" uid="uid://cc0coedkbpqoy" path="res://materials/skyboxes/AllSkyFree_Sky_EpicBlueSunset_Equirect.jpg" id="1_d6y6q"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x52af"]
+panorama = ExtResource("1_d6y6q")
+
+[sub_resource type="Sky" id="Sky_dr4sy"]
+sky_material = SubResource("PanoramaSkyMaterial_x52af")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_dr4sy")
+sky_rotation = Vector3(0, 3.31613, 0)
+tonemap_mode = 3
