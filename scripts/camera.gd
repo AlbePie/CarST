@@ -54,6 +54,7 @@ func _process(_delta) -> void:
 			)
 			
 			cast.global_position = car.global_position
+			var cast_prev_rotation = cast.rotation
 			cast.global_rotation.y += car.global_rotation.y
 			cast.force_raycast_update()
 			
@@ -79,4 +80,4 @@ func _process(_delta) -> void:
 			look_at(car.position)
 			
 			
-			cast.global_rotation.y -= car.global_rotation.y
+			cast.rotation = cast_prev_rotation
