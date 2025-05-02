@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://c8n33iahlojvw"]
 
 [ext_resource type="Material" uid="uid://c877lnvvpt78u" path="res://materials/road/turn.material" id="1_uspkc"]
-[ext_resource type="Script" path="res://scripts/turn-generator.gd" id="1_yg6yq"]
+[ext_resource type="Script" uid="uid://qslpxhvvmavt" path="res://scripts/turn-generator.gd" id="1_yg6yq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_0iryb"]
 _surfaces = [{

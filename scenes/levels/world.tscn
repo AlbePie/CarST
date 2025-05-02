@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ce7t654f1lxa7" path="res://scenes/cube_1x.tscn" id="4_xawwr"]
 [ext_resource type="PackedScene" uid="uid://c04s0006a1h3l" path="res://scenes/borders.tscn" id="5_71qnl"]
 [ext_resource type="Environment" uid="uid://snjqrtu4e13a" path="res://environment.tres" id="6_u2xl4"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="7_trn3o"]
+[ext_resource type="Script" uid="uid://dhugl2no1sl4d" path="res://scripts/camera.gd" id="7_trn3o"]
 [ext_resource type="PackedScene" uid="uid://dbjhjrattxtu8" path="res://scenes/ui.tscn" id="9_af0rd"]
-[ext_resource type="Script" path="res://scripts/minigames.gd" id="10_tj3pw"]
-[ext_resource type="Script" path="res://scripts/ui.gd" id="10_yv7sy"]
+[ext_resource type="Script" uid="uid://l2hvdup2yy6h" path="res://scripts/minigames.gd" id="10_tj3pw"]
+[ext_resource type="Script" uid="uid://c5vlohta2nwsj" path="res://scripts/ui.gd" id="10_yv7sy"]
 [ext_resource type="PackedScene" uid="uid://bnvmibrcoxe3y" path="res://scenes/minigame_start_zone.tscn" id="11_ou0tx"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wi6lg"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ce7t654f1lxa7"]
 
-[ext_resource type="Script" path="res://scripts/cube_destroy.gd" id="1_awtf3"]
+[ext_resource type="Script" uid="uid://cc72xqgl2qxc7" path="res://scripts/cube_destroy.gd" id="1_awtf3"]
 [ext_resource type="Material" uid="uid://dxy2rf11kx1g8" path="res://materials/cube.material" id="2_ll5fo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0lm61"]

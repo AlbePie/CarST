@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bnvmibrcoxe3y"]
 
-[ext_resource type="Script" path="res://scripts/minigame_start_zone.gd" id="1_5a6s8"]
+[ext_resource type="Script" uid="uid://bvvaxwlfqcqyr" path="res://scripts/minigame_start_zone.gd" id="1_5a6s8"]
 [ext_resource type="FontFile" uid="uid://fdt8rh82f1oa" path="res://themes/RubikDirt-Regular.ttf" id="2_rb1gc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtkdn"]

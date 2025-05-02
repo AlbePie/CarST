@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4jl6q856hd6h" path="res://models/cars/car-hull.glb" id="1_nj0m6"]
 [ext_resource type="PackedScene" uid="uid://dtof6b7p5uxeh" path="res://models/car-wheel.glb" id="2_nfuaa"]
-[ext_resource type="Script" path="res://scripts/car.gd" id="2_shp52"]
+[ext_resource type="Script" uid="uid://drp7k34e4jgid" path="res://scripts/car.gd" id="2_shp52"]
 [ext_resource type="Material" uid="uid://djw01ou7x3uyd" path="res://materials/cars/car-hull.material" id="4_mad3s"]
 [ext_resource type="FontFile" uid="uid://fdt8rh82f1oa" path="res://themes/RubikDirt-Regular.ttf" id="4_s8h4l"]
 [ext_resource type="Material" uid="uid://ddb313mvmpi1e" path="res://materials/particles/exhaust_particles.material" id="5_3h6s2"]

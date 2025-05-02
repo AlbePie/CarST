@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4ki1hw4wpiwr"]
 
-[ext_resource type="Script" path="res://scripts/map_pick.gd" id="1_77c30"]
+[ext_resource type="Script" uid="uid://by11l5scobxgo" path="res://scripts/map_pick.gd" id="1_77c30"]
 [ext_resource type="Theme" uid="uid://4ofruqjnl3dy" path="res://themes/ui.theme" id="2_8nhvg"]
 
 [node name="MapPick" type="PopupPanel" node_paths=PackedStringArray("ui", "map_scroll", "map_select")]

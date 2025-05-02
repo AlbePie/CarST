@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://b8pm65yormvxa"]
 
-[ext_resource type="Script" path="res://scripts/menu.gd" id="1_30doa"]
+[ext_resource type="Script" uid="uid://bncqqggv0qkwy" path="res://scripts/menu.gd" id="1_30doa"]
 [ext_resource type="PackedScene" uid="uid://cy4vhrngjcfm" path="res://scenes/car.tscn" id="1_kl4h3"]
 [ext_resource type="PackedScene" uid="uid://dxue6c8i7v3sf" path="res://scenes/public_server_template.tscn" id="2_43x13"]
 [ext_resource type="PlaneMesh" uid="uid://bcm8qwbme66mu" path="res://models/grass_1000x1000.tres" id="3_8dfn8"]
