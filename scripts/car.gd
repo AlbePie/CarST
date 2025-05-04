@@ -5,13 +5,19 @@ extends VehicleBody3D
 var hull_material = preload("res://materials/cars/car-hull.material")
 
 @export var uddetector:Area3D
+@export_group("Exhaust", "exhaust_")
 @export var exhaust_one:GPUParticles3D
 @export var exhaust_two:GPUParticles3D
 @export var exhaust_material:ParticleProcessMaterial
-
 @export_group("Camera")
 @export var driver_marker:Marker3D
-@export_group("")
+@export_group("Wheels", "wheel_")
+@export var wheel_front_left:VehicleWheel3D
+@export var wheel_front_right:VehicleWheel3D
+@export var wheel_rear_left:VehicleWheel3D
+@export var wheel_rear_right:VehicleWheel3D
+
+enum Wheels{FRONT_LEFT,FRONT_RIGHT,REAR_LEFT,REAR_RIGHT}
 
 var startpos:Marker3D
 
@@ -21,11 +27,12 @@ var is_flipped = false
 
 var pressed_actions = []
 
-var additional_data:
+var motor_running:bool:
 	get:
-		return null
+		return custom_is_action_pressed("ui_up") or custom_is_action_pressed("ui_down")
 	set(val):
-		update_client(AdditionalClientData.from_bytes(val))
+		exhaust_one.emitting = val
+		exhaust_two.emitting = val
 
 
 func _ready() -> void:
@@ -54,9 +61,7 @@ func _process(_delta) -> void:
 		if custom_is_action_pressed("ui_left"): steering += 0.3 * ratio + 0.2
 		if custom_is_action_pressed("ui_right"): steering -= 0.3 * ratio + 0.2
 		if network.game_state == network.GameState.OFFLINE:
-			additional_data = AdditionalClientData.new(
-				custom_is_action_pressed("ui_up") or custom_is_action_pressed("ui_down")
-			).to_bytes()
+			motor_running = motor_running # peak
 	is_flipped = uddetector.has_overlapping_bodies()
 
 func _physics_process(_delta) -> void:
@@ -78,6 +83,13 @@ func custom_is_action_pressed(action:String) -> bool:
 	else:
 		return Input.is_action_pressed(action)
 
-func update_client(data:AdditionalClientData):
-	exhaust_one.emitting = data.motor_running
-	exhaust_two.emitting = data.motor_running
+func get_wheel(wheel:Wheels):
+	match wheel:
+		Wheels.FRONT_LEFT:
+			return wheel_front_left
+		Wheels.FRONT_RIGHT:
+			return wheel_front_right
+		Wheels.REAR_LEFT:
+			return wheel_rear_left
+		Wheels.REAR_RIGHT:
+			return wheel_rear_right

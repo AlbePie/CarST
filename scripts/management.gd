@@ -30,6 +30,33 @@ func get_maps() -> Array[Map]:
 	
 	return result
 
+# TOOLS
+
+func encode_packed_byte_arrays(arrays: Array[PackedByteArray]) -> PackedByteArray:
+	var bytearray = PackedByteArray()
+	
+	for array in arrays:
+		var index = len(bytearray)
+		bytearray.append_array(PackedByteArray([0, 0]))
+		bytearray.encode_u16(index, len(array))
+		bytearray.append_array(array)
+	
+	return bytearray
+
+func decode_packed_byte_arrays(data: PackedByteArray) -> Array[PackedByteArray]:
+	var bytearrays:Array[PackedByteArray] = []
+	
+	var index = 0
+	while index < len(data):
+		var length = data.decode_u16(index)
+		index += 2
+		var bytearray = PackedByteArray()
+		for i in range(length):
+			bytearray.append(data[index])
+			index += 1
+		bytearrays.append(bytearray)
+	
+	return bytearrays
 
 func _ready():
 	randomize()

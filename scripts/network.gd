@@ -61,7 +61,7 @@ var car_scene:PackedScene = load("res://scenes/car.tscn")
 
 const client_full_state_time = 100 # how often is full state sended instead of diff
 
-var destroyed_cube_paths:Array[Array] = []
+var destroyed_cube_paths:Array[String] = []
 
 
 func start_dedicated(port:int, map:PackedScene) -> void:
@@ -88,7 +88,6 @@ func register_client(client_data_bytes:PackedByteArray) -> void:
 	
 	var client_car = add_local_car(multiplayer.get_remote_sender_id(), client_data_bytes)
 	client_data.car = client_car
-	client_data.ticks_to_full_state = client_full_state_time
 	
 	for client_id in clients.keys():
 		rpc_id(multiplayer.get_remote_sender_id(), "add_local_car", client_id, clients[client_id].to_bytes())
@@ -120,36 +119,40 @@ func client_input(actions:Dictionary) -> void:
 	
 	send_server_state(multiplayer.get_remote_sender_id())
 
+var frame_state
 func send_server_state(client_id:int) -> void:
 	var client = get_client_data(client_id)
 	if client == null:
 		return
-	var cars = {}
-	var blocks = {}
+	
+	if frame_state == null:
+		frame_state = get_state().to_bytes()
+	
+	rpc_id(client_id, "set_client_state", frame_state)
+
+func get_state() -> MapState:
+	var cars:Dictionary[String, MapState.CarRecord] = {}
+	var blocks:Dictionary[String, MapState.TransformRecord] = {}
 	
 	for car in get_child(0).get_node("Cars").get_children(): # serialize cars
-		if not (car is VehicleBody3D):
+		if not (car is Car):
 			continue
 		
-		for obj_path in [".", "FR", "FL", "RR", "RL"]: # for path in object that needs to be saved - car and wheels
-			var obj = car.get_node(obj_path)
-			var obj_send = {
-				"position": obj.position, 
-				"rotation": obj.rotation, 
-			}
-			if obj is Car: # store velocity if a car for speedmeter purposes
-				obj_send.linear_velocity = obj.linear_velocity
-				obj_send.is_flipped = obj.is_flipped
-				obj_send.additional_data = AdditionalClientData.new(
-					obj.pressed_actions.has("ui_up") or obj.pressed_actions.has("ui_down")
-				).to_bytes()
-			cars[[car.name, obj_path]] = obj_send
+		var car_record = MapState.CarRecord.new()
+		
+		car_record.transform = MapState.TransformRecord.new(car.position, car.rotation)
+		car_record.is_flipped = car.is_flipped
+		car_record.motor_running = car.motor_running
+		
+		for wheel_id in Car.Wheels.values():
+			var wheel = car.get_wheel(wheel_id)
+			car_record.wheels[wheel_id] = MapState.TransformRecord.new(wheel.position, wheel.rotation)
+		
+		cars[car.name] = car_record
 	
 	for wall in get_child(0).get_node("Map/Cubes").get_children(): # serialize cubes
-		var wall_id = wall.name.trim_prefix("Wall")
 		for cube in wall.get_children():
-			var cube_path = [wall_id, cube.name.trim_prefix("Cube")]
-			var cube_send = {"position": cube.position, "rotation": cube.rotation}
+			var cube_path = str(wall.get_parent().get_path_to(cube))
 			if cube.should_be_deleted:
 				destroyed_cube_paths.append(cube_path)
 				
@@ -158,18 +161,9 @@ func send_server_state(client_id:int) -> void:
 					rpc_id(client_rpc_id, "delete_local_cube", cube_path)
 				continue
 			
-			blocks[cube_path] = cube_send
+			blocks[cube_path] = MapState.TransformRecord.new(cube.position, cube.rotation)
 	
-	var state = MapState.new(cars, blocks)
-	
-	if client.ticks_to_full_state <= 0:
-		rpc_id(client_id, "set_client_state", state.to_bytes())
-		client.ticks_to_full_state = client_full_state_time
-	else:
-		rpc_id(client_id, "set_client_state", state.compare_to(client.prev_state).to_bytes())
-		client.ticks_to_full_state -= 1
-	
-	client.prev_state = state
+	return MapState.new(cars, blocks)
 
 func get_client_data(client_id:int) -> ClientData:
 	if not clients.has(client_id):
@@ -217,29 +211,36 @@ func set_client_state(state_bytes:PackedByteArray) -> void:
 	var state = MapState.from_bytes(state_bytes)
 	
 	for path in state.cars.keys():
-		var obj = get_car(path)
-		if obj == null:
+		var car = get_car(path)
+		var record = state.cars[path]
+		if car == null:
 			continue
 		
-		var obj_vals = state.cars[path]
-		for prop_path in obj_vals.keys():
-			obj.set_indexed(prop_path, obj_vals[prop_path])
+		set_node_transform_from_record(car, record.transform)
+		car.is_flipped = record.is_flipped
+		car.motor_running = record.motor_running
 		
-		var nick_node = obj.get_node_or_null("Nick")
+		for wheel in record.wheels:
+			set_node_transform_from_record(car.get_wheel(wheel), record.wheels[wheel])
+		
+		var nick_node = car.get_node_or_null("Nick")
 		if nick_node != null:
-			nick_node.position = obj.position + Vector3.UP * 2
+			nick_node.position = car.position + Vector3.UP * 2
 	
 	for path in state.blocks.keys():
 		var cube = get_cube(path)
+		var record = state.blocks[path]
 		if cube == null:
 			continue
 		
-		var cube_vals = state.blocks[path]
-		for prop_path in cube_vals.keys():
-			cube.set(prop_path, cube_vals[prop_path])
+		set_node_transform_from_record(cube, record)
+
+func set_node_transform_from_record(node: Node3D, record:MapState.TransformRecord):
+	node.position = record.position
+	node.rotation = record.rotation
 
 
-func _physics_process(_delta) -> void:
+func _process(_delta) -> void:
 	if game_state == GameState.ONLINE_CLIENT and client_connected:
 		if multiplayer.multiplayer_peer.get_connection_status() == multiplayer.multiplayer_peer.CONNECTION_DISCONNECTED:
 			terminate_game()
@@ -252,6 +253,8 @@ func _physics_process(_delta) -> void:
 			"brake": Input.is_action_pressed("brake"),
 			"reset": Input.is_action_pressed("reset"),
 		})
+	elif game_state == GameState.ONLINE_SERVER:
+		frame_state = null
 
 # BOTH ONLINE MODES
 @rpc("authority", "call_remote", "reliable")
@@ -272,16 +275,16 @@ func remove_local_car(id:int) -> void:
 	get_child(0).get_node("Cars/%d" % id).queue_free()
 
 @rpc("authority", "call_remote", "reliable")
-func delete_local_cube(path:Array) -> void:
+func delete_local_cube(path:String) -> void:
 	var cube = get_cube(path)
 	if cube != null:
 		cube.explode()
 
 func get_car(path) -> Car:
-	return get_child(0).get_node_or_null("Cars/%s/%s" % path)
+	return get_child(0).get_node_or_null("Cars/%s" % path)
 
 func get_cube(path) -> DestroyableCube:
-	return get_child(0).get_node_or_null("Map/Cubes/Wall%s/Cube%s" % path)
+	return get_child(0).get_node_or_null("Map/Cubes/%s" % path)
 
 # LOCAL GAME
 func start_local(map:String, _model:String) -> void:

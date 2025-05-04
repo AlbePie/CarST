@@ -10,8 +10,6 @@ var car_color:Color
 
 # SERVER PROPERTIES
 var car:VehicleBody3D
-var ticks_to_full_state:int = 0
-var prev_state:MapState = MapState.new()
 
 
 func _init(nick:String, model_id:String, c_color:Color) -> void:
@@ -22,8 +20,21 @@ func _init(nick:String, model_id:String, c_color:Color) -> void:
 
 
 func to_bytes() -> PackedByteArray:
-	return var_to_bytes([nickname, _model_id, car_color])
+	return management.encode_packed_byte_arrays([
+		nickname.to_utf8_buffer(),
+		_model_id.to_ascii_buffer(),
+		PackedByteArray([
+			car_color.r8, car_color.g8, car_color.b8
+		])
+	])
 
 static func from_bytes(data:PackedByteArray) -> ClientData: # wrong usage is not handled
-	return ClientData.new.callv(bytes_to_var(data)) # creates new resource with parameters
-	# specified as array in data
+	var bytearrays = management.decode_packed_byte_arrays(data)
+	
+	return ClientData.new(
+		bytearrays[0].get_string_from_utf8(),
+		bytearrays[1].get_string_from_ascii(),
+		Color8(
+			bytearrays[2][0], bytearrays[2][1], bytearrays[2][2]
+		)
+	)

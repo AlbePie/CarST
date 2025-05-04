@@ -273,7 +273,7 @@ material = SubResource("StandardMaterial3D_bwlnq")
 radius = 0.1
 height = 0.2
 
-[node name="Car" type="VehicleBody3D" node_paths=PackedStringArray("uddetector", "exhaust_one", "exhaust_two", "driver_marker") groups=["client_car"]]
+[node name="Car" type="VehicleBody3D" node_paths=PackedStringArray("uddetector", "exhaust_one", "exhaust_two", "driver_marker", "wheel_front_left", "wheel_front_right", "wheel_rear_left", "wheel_rear_right") groups=["client_car"]]
 mass = 22.0
 physics_material_override = SubResource("PhysicsMaterial_21rxc")
 script = ExtResource("2_shp52")
@@ -282,6 +282,10 @@ exhaust_one = NodePath("Exhaust/One")
 exhaust_two = NodePath("Exhaust/Two")
 exhaust_material = ExtResource("5_3h6s2")
 driver_marker = NodePath("Car hull/Driver")
+wheel_front_left = NodePath("FL")
+wheel_front_right = NodePath("FR")
+wheel_rear_left = NodePath("RL")
+wheel_rear_right = NodePath("RR")
 
 [node name="Car hull" parent="." instance=ExtResource("1_nj0m6")]
 
